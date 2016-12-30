@@ -9,6 +9,9 @@ coverage
 # production
 build
 
+# notes
+notes-to-self.txt
+
 # misc
 .DS_Store
 .env
