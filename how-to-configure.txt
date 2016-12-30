@@ -1,0 +1,16 @@
+npm -init: say yes to everything
+git -init: already done.
+
+npm install --save a bunch of stuff
+react, react-router
+
+maybe not save right off the bat if I'm testing out environments. I can re-install later with --save.
+
+configure a local eslint
+configure local testing apps (probs mocha + jasmine + chai) --save-dev
+
+run npm outdated to see what's behind
+run npm update to bring comptabile releases up to speed
+
+
+For Testing, use Mocha + Chai. It's what the Full-Stack Voting app tutorial used.
