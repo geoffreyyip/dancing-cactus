@@ -24,7 +24,7 @@ class DebtTable extends React.Component {
   // array rendered elements require keys, that's why a key property is defined
   render() {
     // note to self: I'll prob want to factor this out into a class method with binded this
-    const displayLineItems = this.state.mockRegular.map(loan => (
+    const lineItems = this.state.mockRegular.map(loan => (
       <DisplayLineItemContainer
         key={loan.id}
         id={loan.id}
@@ -36,7 +36,7 @@ class DebtTable extends React.Component {
     ));
     this.state.mockEdit.forEach((loan, index) => {
       if (loan.morphing) {
-        displayLineItems[index] = (
+        lineItems[index] = (
           <MorphingLineItemContainer
             key={loan.id}
             id={loan.id}
@@ -51,7 +51,7 @@ class DebtTable extends React.Component {
     const additionBar = <AdditionLineItemContainer />;
     return (
       <div>
-        {displayLineItems}
+        {lineItems}
         {additionBar}
       </div>
     );

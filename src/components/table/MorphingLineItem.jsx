@@ -1,17 +1,7 @@
 import React from 'react';
 import MorphingBar from './MorphingBar';
+import styles from '../../styles/tableStyles';
 
-const styles = {
-  lineWrapper: {
-    display: 'flex',
-    flexDirection: 'row',
-    flexWrap: 'nowrap',
-    minWidth: '500px',
-  },
-  lineItem: {
-    flex: 1,
-  },
-};
 
 const MorphingLineItem = props => (
   <div style={styles.lineWrapper}>

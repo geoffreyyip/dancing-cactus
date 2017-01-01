@@ -1,17 +1,6 @@
 import React from 'react';
 import ModificationBar from './ModificationBar';
-
-const styles = {
-  lineWrapper: {
-    display: 'flex',
-    flexDirection: 'row',
-    flexWrap: 'nowrap',
-    minWidth: '500px',
-  },
-  lineItem: {
-    flex: 1,
-  },
-};
+import styles from '../../styles/tableStyles';
 
 const DisplayLineItem = props => (
   <div style={styles.lineWrapper}>
