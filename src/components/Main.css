@@ -1,0 +1,18 @@
+.graph > * {
+  border: 1px solid seagreen;
+}
+
+.graph {
+  border: 1px solid goldenrod;
+  display: flex;
+  height: 400px;
+  width: 800px;
+}
+
+.debt-table * {
+  border: 1px solid tomato;
+}
+
+.debt-table {
+  border: 1px solid skyblue;
+}
