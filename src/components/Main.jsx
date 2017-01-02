@@ -40,6 +40,7 @@ class Main extends React.Component {
     };
 
     this.handleNewDebt = this.handleNewDebt.bind(this);
+    this.morphingHandler = this.morphingHandler.bind(this);
   }
 
   // this method assumes a properly formatted liability object with
@@ -61,6 +62,20 @@ class Main extends React.Component {
     });
   }
 
+  morphingHandler(index) {
+    return {
+      handleDeleteChanges: () => {
+        const newDebts = shallowCopyArray(this.state.debts);
+        // newDebts[index].pendingChanges = false;
+        delete newDebts[index].pendingChanges;
+
+        this.setState({
+          debts: newDebts,
+        });
+      },
+    };
+  }
+
   render() {
     return (
       <div>
@@ -68,6 +83,7 @@ class Main extends React.Component {
         <DebtTable
           debts={this.state.debts}
           handleNewDebt={this.handleNewDebt}
+          morphingHandler={this.morphingHandler}
         />
       </div>
     );

@@ -16,16 +16,17 @@ class DebtTable extends React.Component {
   // elements with a defined pendingChanges property and another
   // for those without it.
   getLineItems() {
-    const lineItems = this.props.debts.map((loan) => {
+    const lineItems = this.props.debts.map((loan, index) => {
       if (loan.pendingChanges) {
         return (
           <MorphingLineItemContainer
             key={loan.id}
-            id={loan.pendingChanges.id}
+            id={loan.id}
             name={loan.pendingChanges.name}
             amount={loan.pendingChanges.amount}
             interestRate={loan.pendingChanges.interestRate}
             minPayment={loan.pendingChanges.minPayment}
+            handleDeleteChanges={this.props.morphingHandler(index).handleDeleteChanges}
           />
         );
       }
@@ -73,6 +74,7 @@ DebtTable.propTypes = {
       }),
     })).isRequired,
   handleNewDebt: React.PropTypes.func.isRequired,
+  morphingHandler: React.PropTypes.func.isRequired,
 };
 
 export default DebtTable;

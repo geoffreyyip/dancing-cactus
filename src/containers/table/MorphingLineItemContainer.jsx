@@ -7,6 +7,7 @@ const MorphingLineItemContainer = props => (
     amount={props.amount}
     interestRate={props.interestRate}
     minPayment={props.minPayment}
+    handleDeleteChanges={props.handleDeleteChanges}
   />
 );
 
@@ -15,6 +16,7 @@ MorphingLineItemContainer.propTypes = {
   amount: React.PropTypes.number.isRequired,
   interestRate: React.PropTypes.number.isRequired,
   minPayment: React.PropTypes.number.isRequired,
+  handleDeleteChanges: React.PropTypes.func.isRequired,
 };
 
 /*
