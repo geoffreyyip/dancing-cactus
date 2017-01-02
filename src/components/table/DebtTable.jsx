@@ -17,6 +17,7 @@ class DebtTable extends React.Component {
   // for those without it.
   getLineItems() {
     const lineItems = this.props.debts.map((loan, index) => {
+      // TODO: replace with tertiary operator
       if (loan.pendingChanges) {
         return (
           <MorphingLineItemContainer
@@ -38,6 +39,7 @@ class DebtTable extends React.Component {
           amount={loan.amount}
           interestRate={loan.interestRate}
           minPayment={loan.minPayment}
+          handleDeleteItem={this.props.deleteHandler(index).handleDeleteItem}
         />
       );
     });
@@ -75,6 +77,7 @@ DebtTable.propTypes = {
     })).isRequired,
   handleNewDebt: React.PropTypes.func.isRequired,
   morphingHandler: React.PropTypes.func.isRequired,
+  deleteHandler: React.PropTypes.func.isRequired,
 };
 
 export default DebtTable;

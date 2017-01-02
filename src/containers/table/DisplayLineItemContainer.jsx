@@ -1,13 +1,17 @@
 import React from 'react';
 import DisplayLineItem from '../../components/table/DisplayLineItem';
+import ModificationBar from '../../components/table/ModificationBar';
 
 const DisplayLineItemContainer = props => (
-  <DisplayLineItem
-    name={props.name}
-    amount={props.amount}
-    interestRate={props.interestRate}
-    minPayment={props.minPayment}
-  />
+  <div>
+    <DisplayLineItem
+      name={props.name}
+      amount={props.amount}
+      interestRate={props.interestRate}
+      minPayment={props.minPayment}
+    />
+    <ModificationBar onDeleteItem={props.handleDeleteItem} />
+  </div>
 );
 
 DisplayLineItemContainer.propTypes = {
@@ -15,6 +19,7 @@ DisplayLineItemContainer.propTypes = {
   amount: React.PropTypes.number.isRequired,
   interestRate: React.PropTypes.number.isRequired,
   minPayment: React.PropTypes.number.isRequired,
+  handleDeleteItem: React.PropTypes.func.isRequired,
 };
 
 /*

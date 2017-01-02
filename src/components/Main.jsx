@@ -41,6 +41,7 @@ class Main extends React.Component {
 
     this.handleNewDebt = this.handleNewDebt.bind(this);
     this.morphingHandler = this.morphingHandler.bind(this);
+    this.deleteHandler = this.deleteHandler.bind(this);
   }
 
   // this method assumes a properly formatted liability object with
@@ -70,6 +71,22 @@ class Main extends React.Component {
       handleDeleteChanges: () => {
         const newDebts = shallowCopyArray(this.state.debts);
         delete newDebts[index].pendingChanges;
+
+        this.setState({
+          debts: newDebts,
+        });
+      },
+    };
+  }
+
+  deleteHandler(index) {
+    return {
+      handleDeleteItem: () => {
+        // removes item by combining the array before
+        // and the array after together
+        const beforeDeletion = this.state.debts.slice(0, index);
+        const afterDeletion = this.state.debts.slice(index + 1);
+        const newDebts = beforeDeletion.concat(afterDeletion);
 
         this.setState({
           debts: newDebts,
