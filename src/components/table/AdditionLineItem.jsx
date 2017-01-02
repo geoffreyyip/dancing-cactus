@@ -9,10 +9,10 @@ class AdditionLineItem extends React.Component {
     // good refactoring opportunity here
     // todo: factor out input fields into their own components
     this.state = {
-      name: '',
-      amount: '',
-      interestRate: '',
-      minPayment: '',
+      name: 'college',
+      amount: '2200',
+      interestRate: '0.05',
+      minPayment: '85',
     };
     this.addNewDebt = this.addNewDebt.bind(this);
     this.handleNameChange = this.handleNameChange.bind(this);
@@ -28,15 +28,13 @@ class AdditionLineItem extends React.Component {
   // onNewDebt requires an object with specific properties, name, amount, etc.
   // this method will need to ensure a proper input and notify user of errors
   addNewDebt() {
-    const mockIdNum = 999;
     const newDebt = {
-      id: mockIdNum,
       name: this.state.name,
       amount: Number(this.state.amount),
       interestRate: Number(this.state.interestRate),
       minPayment: Number(this.state.minPayment),
     };
-    this.props.onNewDebt([newDebt]);
+    this.props.onNewDebt(newDebt);
   }
 
   handleNameChange(event) {

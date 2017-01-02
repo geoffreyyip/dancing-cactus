@@ -23,6 +23,14 @@ const mockData = {
   ],
 };
 
+function shallowCopyArray(arr) {
+  const result = [];
+  arr.forEach((item) => {
+    result.push(item);
+  });
+  return result;
+}
+
 class Main extends React.Component {
   constructor(props) {
     super(props);
@@ -34,19 +42,19 @@ class Main extends React.Component {
     this.handleNewDebt = this.handleNewDebt.bind(this);
   }
 
-  // FIXIT: Array.prototype.concatenate is used to satisfy React's immutability
-  // requirement, as the concatenate method returns a new array. However, this
-  // method is prone to bugs for our use case. handleNewDebt() is meant to add one
-  // new item in Object form, but concatenate requires an object in Array form
-  // and typically appends a list of items.
-
-  // The 'right' solution is learning Immutable.js. The 'right now' solution is
-  // making a shallow copy.
-
-  // TODO: Method should add a new unique id per invokation.
+  // FIXIT: Object.assign returns an object, not a sorted array
   handleNewDebt(liability) {
+    // shallow copy state to prevent direct manipulation of state
+    const newDebts = shallowCopyArray(this.state.debts);
+    newDebts.push(liability);
+
+    // assign unique id to new liability
+    const last = newDebts.length - 1;
+    const currentMaxId = newDebts[last - 1].id;
+    newDebts[last].id = currentMaxId + 1;
+
     this.setState({
-      debts: this.state.debts.concat(liability),
+      debts: newDebts,
     });
   }
 
