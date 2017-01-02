@@ -7,8 +7,6 @@ class AdditionLineItem extends React.Component {
   constructor(props) {
     super(props);
 
-    // good refactoring opportunity here
-    // todo: factor out input fields into their own components
     this.state = {
       name: 'college',
       amount: '2200',
@@ -20,9 +18,7 @@ class AdditionLineItem extends React.Component {
     this.clearState = this.clearState.bind(this);
   }
 
-  // the difficulty stems from onNewDebt's lack of type coercion and checking
-  // onNewDebt requires an object with specific properties, name, amount, etc.
-  // this method will need to ensure a proper input and notify user of errors
+  // TODO: add type checking to ensure valid input to Main.jsx's callback
   addNewDebt() {
     const newDebt = {
       name: this.state.name,
@@ -59,8 +55,16 @@ class AdditionLineItem extends React.Component {
   render() {
     return (
       <div style={styles.lineWrapper}>
-        <EntryCell onChange={this.handleChange} field="name" display={this.state.name} />
-        <EntryCell onChange={this.handleChange} field="amount" display={this.state.amount} />
+        <EntryCell
+          onChange={this.handleChange}
+          field="name"
+          display={this.state.name}
+        />
+        <EntryCell
+          onChange={this.handleChange}
+          field="amount"
+          display={this.state.amount}
+        />
         <EntryCell
           onChange={this.handleChange}
           field="interestRate"
