@@ -7,13 +7,19 @@ import '../styles/Main.css';
 const mockData = {
   debts: [
     { id: 21, name: 'Car Loan', amount: 9000, interestRate: 0.05, minPayment: 620.23 },
-    { id: 22, name: 'College Loan', amount: 20000, interestRate: 0.07, minPayment: 1685.47 },
+    { id: 22,
+      name: 'College Loan',
+      amount: 20000,
+      interestRate: 0.07,
+      minPayment: 1685.47,
+      pendingChanges: {
+        name: 'Success!',
+        amount: 17000,
+        interestRate: 0.032,
+        minPayment: 2200.00,
+      },
+    },
     { id: 23, name: 'Mortgage', amount: 43000, interestRate: 0.035, minPayment: 2100.00 },
-  ],
-  pendingChanges: [
-    { id: 21, morphing: false },
-    { id: 22, morphing: true, name: 'Success if second in list!', amount: 17000, interestRate: 0.032, minPayment: 2200.00 },
-    { id: 23, morphing: false },
   ],
 };
 
@@ -23,7 +29,6 @@ class Main extends React.Component {
 
     this.state = {
       debts: mockData.debts,
-      pendingChanges: mockData.pendingChanges,
     };
 
     this.handleNewDebt = this.handleNewDebt.bind(this);
@@ -37,11 +42,11 @@ class Main extends React.Component {
 
   // The 'right' solution is learning Immutable.js. The 'right now' solution is
   // making a shallow copy.
+
+  // TODO: Method should add a new unique id per invokation.
   handleNewDebt(liability) {
-    const blankChange = [{ id: liability.id, morphing: false }];
     this.setState({
       debts: this.state.debts.concat(liability),
-      pendingChanges: this.state.pendingChanges.concat(blankChange),
     });
   }
 
@@ -51,7 +56,6 @@ class Main extends React.Component {
         <Graph />
         <DebtTable
           debts={this.state.debts}
-          pendingChanges={this.state.pendingChanges}
           handleNewDebt={this.handleNewDebt}
         />
       </div>

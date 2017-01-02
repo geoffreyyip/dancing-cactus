@@ -10,37 +10,42 @@ class DebtTable extends React.Component {
     this.getLineItems.bind(this);
   }
 
+  // Debts array is passed down from the Main component's state
+
+  // getLineItems() renders two different components, one for
+  // elements with a defined pendingChanges property and another
+  // for those without it.
   getLineItems() {
-    const lineItems = this.props.debts.map(loan => (
-      <DisplayLineItemContainer
-        key={loan.id}
-        id={loan.id}
-        name={loan.name}
-        amount={loan.amount}
-        interestRate={loan.interestRate}
-        minPayment={loan.minPayment}
-      />
-    ));
-    this.props.pendingChanges.forEach((loan, index) => {
-      if (loan.morphing) {
-        lineItems[index] = (
+    const lineItems = this.props.debts.map((loan) => {
+      if (loan.pendingChanges) {
+        return (
           <MorphingLineItemContainer
             key={loan.id}
-            id={loan.id}
-            name={loan.name}
-            amount={loan.amount}
-            interestRate={loan.interestRate}
-            minPayment={loan.minPayment}
+            id={loan.pendingChanges.id}
+            name={loan.pendingChanges.name}
+            amount={loan.pendingChanges.amount}
+            interestRate={loan.pendingChanges.interestRate}
+            minPayment={loan.pendingChanges.minPayment}
           />
         );
       }
+      return (
+        <DisplayLineItemContainer
+          key={loan.id}
+          id={loan.id}
+          name={loan.name}
+          amount={loan.amount}
+          interestRate={loan.interestRate}
+          minPayment={loan.minPayment}
+        />
+      );
     });
     return lineItems;
   }
 
-  // array rendered elements require keys, that's why a key property is defined
+  // handleNewDebt method will get passed down multiple hierarchies
+  // Main > DebtTable (you are here) > AdditionLineItemContainer > AdditionLineItem
   render() {
-    // note to self: I'll prob want to factor this out into a class method with binded this
     const lineItems = this.getLineItems();
     const additionBar = <AdditionLineItemContainer handleNewDebt={this.props.handleNewDebt} />;
     return (
@@ -60,15 +65,12 @@ DebtTable.propTypes = {
       amount: React.PropTypes.number.isRequired,
       interestRate: React.PropTypes.number.isRequired,
       minPayment: React.PropTypes.number.isRequired,
-    })).isRequired,
-  pendingChanges: React.PropTypes.arrayOf(
-    React.PropTypes.shape({
-      id: React.PropTypes.number.isRequired,
-      morphing: React.PropTypes.bool.isRequired,
-      name: React.PropTypes.string,
-      amount: React.PropTypes.number,
-      interestRate: React.PropTypes.number,
-      minPayment: React.PropTypes.number,
+      pendingChanges: React.PropTypes.shape({
+        name: React.PropTypes.string.isRequired,
+        amount: React.PropTypes.number.isRequired,
+        interestRate: React.PropTypes.number.isRequired,
+        minPayment: React.PropTypes.number.isRequired,
+      }),
     })).isRequired,
   handleNewDebt: React.PropTypes.func.isRequired,
 };

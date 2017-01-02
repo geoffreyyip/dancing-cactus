@@ -21,6 +21,12 @@ class AdditionLineItem extends React.Component {
     this.handlePaymentChange = this.handlePaymentChange.bind(this);
   }
 
+  // fixit: this method's spagetti, future developers will have to
+  // coordinate changes between here and Main's onNewDebt method
+
+  // the difficulty stems from onNewDebt's lack of type coercion and checking
+  // onNewDebt requires an object with specific properties, name, amount, etc.
+  // this method will need to ensure a proper input and notify user of errors
   addNewDebt() {
     const mockIdNum = 999;
     const newDebt = {
