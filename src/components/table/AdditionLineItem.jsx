@@ -17,6 +17,7 @@ class AdditionLineItem extends React.Component {
     };
     this.addNewDebt = this.addNewDebt.bind(this);
     this.handleChange = this.handleChange.bind(this);
+    this.clearState = this.clearState.bind(this);
   }
 
   // the difficulty stems from onNewDebt's lack of type coercion and checking
@@ -45,6 +46,16 @@ class AdditionLineItem extends React.Component {
     this.setState(stateChange);
   }
 
+  // sets all state properties to empty strings
+  clearState() {
+    const emptyState = {};
+    Object.keys(this.state).forEach((key) => {
+      emptyState[key] = '';
+    });
+
+    this.setState(emptyState);
+  }
+
   render() {
     return (
       <div style={styles.lineWrapper}>
@@ -62,7 +73,7 @@ class AdditionLineItem extends React.Component {
         />
         <div className="addition-bar" style={styles.lineItem}>
           <i className="fa fa-plus" aria-hidden="true" onClick={this.addNewDebt}> Add </i>
-          <i className="fa fa-ban" aria-hidden="true"> Reset </i>
+          <i className="fa fa-ban" aria-hidden="true" onClick={this.clearState}> Reset </i>
         </div>
       </div>
     );
