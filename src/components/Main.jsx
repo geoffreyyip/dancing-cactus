@@ -62,11 +62,13 @@ class Main extends React.Component {
     });
   }
 
+  // returns a closure that binds to a given index within the Debts state array
+  // closure contains two functions: one to delete pending changes, and
+  // another to commit them
   morphingHandler(index) {
     return {
       handleDeleteChanges: () => {
         const newDebts = shallowCopyArray(this.state.debts);
-        // newDebts[index].pendingChanges = false;
         delete newDebts[index].pendingChanges;
 
         this.setState({
@@ -84,6 +86,7 @@ class Main extends React.Component {
           debts={this.state.debts}
           handleNewDebt={this.handleNewDebt}
           morphingHandler={this.morphingHandler}
+          deleteHandler={this.deleteHandler}
         />
       </div>
     );
