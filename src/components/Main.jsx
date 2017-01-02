@@ -25,6 +25,24 @@ class Main extends React.Component {
       debts: mockData.debts,
       pendingChanges: mockData.pendingChanges,
     };
+
+    this.handleNewDebt = this.handleNewDebt.bind(this);
+  }
+
+  // FIXIT: Array.prototype.concatenate is used to satisfy React's immutability
+  // requirement, as the concatenate method returns a new array. However, this
+  // method is prone to bugs for our use case. handleNewDebt() is meant to add one
+  // new item in Object form, but concatenate requires an object in Array form
+  // and typically appends a list of items.
+
+  // The 'right' solution is learning Immutable.js. The 'right now' solution is
+  // making a shallow copy.
+  handleNewDebt(liability) {
+    const blankChange = [{ id: liability.id, morphing: false }];
+    this.setState({
+      debts: this.state.debts.concat(liability),
+      pendingChanges: this.state.pendingChanges.concat(blankChange),
+    });
   }
 
   render() {
@@ -34,6 +52,7 @@ class Main extends React.Component {
         <DebtTable
           debts={this.state.debts}
           pendingChanges={this.state.pendingChanges}
+          handleNewDebt={this.handleNewDebt}
         />
       </div>
     );

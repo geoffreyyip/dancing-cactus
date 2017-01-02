@@ -42,7 +42,7 @@ class DebtTable extends React.Component {
   render() {
     // note to self: I'll prob want to factor this out into a class method with binded this
     const lineItems = this.getLineItems();
-    const additionBar = <AdditionLineItemContainer />;
+    const additionBar = <AdditionLineItemContainer handleNewDebt={this.props.handleNewDebt} />;
     return (
       <div>
         {lineItems}
@@ -70,6 +70,7 @@ DebtTable.propTypes = {
       interestRate: React.PropTypes.number,
       minPayment: React.PropTypes.number,
     })).isRequired,
+  handleNewDebt: React.PropTypes.func.isRequired,
 };
 
 export default DebtTable;
