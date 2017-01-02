@@ -6,55 +6,39 @@ import AdditionLineItemContainer from '../../containers/table/AdditionLineItemCo
 class DebtTable extends React.Component {
   constructor(props) {
     super(props);
-
-    this.getLineItems.bind(this);
   }
 
-  // Debts array is passed down from the Main component's state
-
-  // getLineItems() renders two different components, one for
-  // elements with a defined pendingChanges property and another
-  // for those without it.
-  getLineItems() {
-    const lineItems = this.props.debts.map((loan, index) => {
-      // TODO: replace with tertiary operator
-      if (loan.pendingChanges) {
-        return (
-          <MorphingLineItemContainer
-            key={loan.id}
-            id={loan.id}
-            name={loan.pendingChanges.name}
-            amount={loan.pendingChanges.amount}
-            interestRate={loan.pendingChanges.interestRate}
-            minPayment={loan.pendingChanges.minPayment}
-            handleDeleteChanges={this.props.morphingHandler(index).handleDeleteChanges}
-          />
-        );
-      }
-      return (
-        <DisplayLineItemContainer
-          key={loan.id}
-          id={loan.id}
-          name={loan.name}
-          amount={loan.amount}
-          interestRate={loan.interestRate}
-          minPayment={loan.minPayment}
-          handleDeleteItem={this.props.deleteHandler(index).handleDeleteItem}
-        />
-      );
-    });
-    return lineItems;
-  }
-
-  // handleNewDebt method will get passed down multiple hierarchies
-  // Main > DebtTable (you are here) > AdditionLineItemContainer > AdditionLineItem
+  // checks whether each Debt object has any pending changes on it
+  // renders a MorphingLineItem for those with pending changes and a
+  // DisplayLineItem for those without
+  // render a AdditionLineItem at the end for users to add new debts with
   render() {
-    const lineItems = this.getLineItems();
-    const additionBar = <AdditionLineItemContainer handleNewDebt={this.props.handleNewDebt} />;
     return (
       <div>
-        {lineItems}
-        {additionBar}
+        {this.props.debts.map((loan, index) => {
+          const has = Object.prototype.hasOwnProperty;
+          const hasPendingChanges = has.call(loan, 'pendingChanges');
+          return (
+            hasPendingChanges
+            ? <MorphingLineItemContainer
+              key={loan.id}
+              name={loan.pendingChanges.name}
+              amount={loan.pendingChanges.amount}
+              interestRate={loan.pendingChanges.interestRate}
+              minPayment={loan.pendingChanges.minPayment}
+              handleDeleteChanges={this.props.morphingHandler(index).handleDeleteChanges}
+            />
+            : <DisplayLineItemContainer
+              key={loan.id}
+              name={loan.name}
+              amount={loan.amount}
+              interestRate={loan.interestRate}
+              minPayment={loan.minPayment}
+              handleDeleteItem={this.props.deleteHandler(index).handleDeleteItem}
+            />
+          );
+        })}
+        <AdditionLineItemContainer handleNewDebt={this.props.handleNewDebt} />;
       </div>
     );
   }
