@@ -42,7 +42,10 @@ class Main extends React.Component {
     this.handleNewDebt = this.handleNewDebt.bind(this);
   }
 
-  // FIXIT: Object.assign returns an object, not a sorted array
+  // this method assumes a properly formatted liability object with
+  // id, name, amount, interestRate, and minPayment properties
+  // name must be a string, all other fields must be numbers
+  // type checking is entrusted to associated methods that call handleNewDebt
   handleNewDebt(liability) {
     // shallow copy state to prevent direct manipulation of state
     const newDebts = shallowCopyArray(this.state.debts);
