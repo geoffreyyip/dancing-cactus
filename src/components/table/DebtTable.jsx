@@ -52,6 +52,7 @@ class DebtTable extends React.Component {
         ))};
         <ModificationBar
           onDeleteItem={this.props.deleteHandler(index).handleDeleteItem}
+          onStartChanges={this.props.changeHandlers(index).handleChangeItem}
         />
       </DisplayLineItemContainer>
 

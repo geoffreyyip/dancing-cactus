@@ -81,23 +81,17 @@ class Main extends React.Component {
         const newDebts = shallowCopyArray(this.state.debts);
         delete newDebts[index].pendingChanges;
 
-        this.setState({
-          debts: newDebts,
-        });
+        this.setState({ debts: newDebts });
       },
 
-      // FIXIT: this depends on the existence DOM attributes
-      // possible solution, have changeHandlers take an
-      // optional {field} argument
       handleEditChanges: (event) => {
         console.log('handleEditChanges triggered');
         const newDebts = shallowCopyArray(this.state.debts);
         newDebts[index].pendingChanges[field] = event.target.value;
 
-        this.setState({
-          debts: newDebts,
-        });
+        this.setState({ debts: newDebts });
       },
+
       // FIXIT: where do I handle errors? Is it okay to handle errors
       // in child components?
       handleSaveChanges: () => {
@@ -122,9 +116,21 @@ class Main extends React.Component {
         });
         delete lineItem.pendingChanges;
 
-        this.setState({
-          debts: newDebts,
+        this.setState({ debts: newDebts });
+      },
+
+      handleChangeItem: () => {
+        console.log('handleStartChanges triggered');
+        const newDebts = shallowCopyArray(this.state.debts);
+        const lineItem = newDebts[index];
+        lineItem.pendingChanges = {};
+
+        this.state.headerInfo.forEach((category) => {
+          const currData = lineItem[category.name];
+          lineItem.pendingChanges[category.name] = String(currData);
         });
+
+        this.setState({ debts: newDebts });
       },
     };
   }
