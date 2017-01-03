@@ -29,7 +29,7 @@ class DebtTable extends React.Component {
           <input
             key={fieldNo}
             style={styles.lineItem}
-            value={loan.pendingChanges.name}
+            value={loan.pendingChanges[category.name]}
             onChange={this.props.changeHandlers(lineNo, category.name).handleEditChanges}
           />
         ))};
