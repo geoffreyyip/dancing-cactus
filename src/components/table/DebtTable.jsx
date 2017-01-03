@@ -1,7 +1,7 @@
 import React from 'react';
 import DisplayLineItemContainer from '../../containers/table/DisplayLineItemContainer';
 import MorphingLineItemContainer from '../../containers/table/MorphingLineItemContainer';
-import AdditionLineItemContainer from '../../containers/table/AdditionLineItemContainer';
+import AdditionLineItem from './AdditionLineItem';
 import MorphingBar from './MorphingBar';
 import ModificationBar from './ModificationBar';
 import styles from '../../styles/tableStyles';
@@ -74,7 +74,7 @@ class DebtTable extends React.Component {
             : this.getDisplayLine(loan, index)
           );
         })}
-        <AdditionLineItemContainer handleNewDebt={this.props.handleNewDebt} />;
+        <AdditionLineItem onNewDebt={this.props.handleNewDebt} />
       </div>
     );
   }
