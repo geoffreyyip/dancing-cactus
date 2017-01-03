@@ -3,6 +3,7 @@ import DisplayLineItemContainer from '../../containers/table/DisplayLineItemCont
 import MorphingLineItemContainer from '../../containers/table/MorphingLineItemContainer';
 import AdditionLineItemContainer from '../../containers/table/AdditionLineItemContainer';
 import MorphingBar from './MorphingBar';
+import ModificationBar from './ModificationBar';
 import styles from '../../styles/tableStyles';
 
 class DebtTable extends React.Component {
@@ -56,14 +57,24 @@ class DebtTable extends React.Component {
 
   getDisplayLine(loan, index) {
     return (
-      <DisplayLineItemContainer
-        key={loan.id}
-        name={loan.name}
-        amount={loan.amount}
-        interestRate={loan.interestRate}
-        minPayment={loan.minPayment}
-        handleDeleteItem={this.props.deleteHandler(index).handleDeleteItem}
-      />
+      <DisplayLineItemContainer style={styles.lineWrapper} key={loan.id}>
+        <div style={styles.lineItem} data-field="name">
+          {loan.name}
+        </div>
+        <div style={styles.lineItem} data-field="amount">
+          {loan.amount}
+        </div>
+        <div style={styles.lineItem} data-field="interestRate">
+          {loan.interestRate}
+        </div>
+        <div style={styles.lineItem} data-field="minPayment">
+          {loan.minPayment}
+        </div>
+        <ModificationBar
+          onDeleteItem={this.props.deleteHandler(index).handleDeleteItem}
+        />
+      </DisplayLineItemContainer>
+
     );
   }
 
