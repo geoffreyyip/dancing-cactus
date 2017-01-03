@@ -14,12 +14,18 @@ const mockData = {
       minPayment: 1685.47,
       pendingChanges: {
         name: 'Success!',
-        amount: 17000,
-        interestRate: 0.032,
-        minPayment: 2200.00,
+        amount: '17000',
+        interestRate: '0.032',
+        minPayment: '2200.00',
       },
     },
     { id: 23, name: 'Mortgage', amount: 43000, interestRate: 0.035, minPayment: 2100.00 },
+  ],
+  debtsMetadata: [
+    { name: 'name', type: String },
+    { name: 'amount', type: Number },
+    { name: 'interestRate', type: Number },
+    { name: 'minPayment', type: Number },
   ],
 };
 
@@ -37,6 +43,7 @@ class Main extends React.Component {
 
     this.state = {
       debts: mockData.debts,
+      debtsMetadata: mockData.debtsMetadata,
     };
 
     this.handleNewDebt = this.handleNewDebt.bind(this);
@@ -63,14 +70,58 @@ class Main extends React.Component {
     });
   }
 
-  // returns a closure that binds to a given index within the Debts state array
-  // closure contains two functions: one to delete pending changes, and
-  // another to commit them
+  // return closures that bind to a given index within the Debts state array
+  // closure contains three functions
+  // - one to delete pending changes (reverting to the original debt)
+  // - one to update pending changes (but not actually save them)
+  // - one to commit pending changes (and overwrite the previous debt)
   morphingHandler(index) {
     return {
       handleDeleteChanges: () => {
         const newDebts = shallowCopyArray(this.state.debts);
         delete newDebts[index].pendingChanges;
+
+        this.setState({
+          debts: newDebts,
+        });
+      },
+
+      // FIXIT: this depends on the existence DOM attributes
+      // possible solution, have morphingHandler take an
+      // optional {field} argument
+      handleEditChanges: (event) => {
+        console.log('handleEditChanges triggered');
+        const newDebts = shallowCopyArray(this.state.debts);
+        const field = event.target.dataset.field;
+        newDebts[index].pendingChanges[field] = event.target.value;
+
+        this.setState({
+          debts: newDebts,
+        });
+      },
+      // FIXIT: where do I handle errors? Is it okay to handle errors
+      // in child components?
+      handleSaveChanges: () => {
+        console.log('handleSaveChanges triggered');
+        const newDebts = shallowCopyArray(this.state.debts);
+        const lineItem = newDebts[index];
+
+        this.state.debtsMetadata.forEach((category) => {
+          let change = lineItem.pendingChanges[category.name];
+          if (change === '') {
+            throw Error(`${category.name} is blank!`);
+          }
+
+          if (category.type === Number) {
+            change = Number(change);
+            if (isNaN(change)) {
+              throw Error(`Numeric change required for ${category.name}!`);
+            }
+          }
+
+          lineItem[category.name] = change;
+        });
+        delete lineItem.pendingChanges;
 
         this.setState({
           debts: newDebts,

@@ -1,16 +1,20 @@
 import React from 'react';
-import MorphingLineItem from '../../components/table/MorphingLineItem';
+// import MorphingLineItem from '../../components/table/MorphingLineItem';
 
 const MorphingLineItemContainer = props => (
-  <MorphingLineItem
-    name={props.name}
-    amount={props.amount}
-    interestRate={props.interestRate}
-    minPayment={props.minPayment}
-    handleDeleteChanges={props.handleDeleteChanges}
-  />
+  // <MorphingLineItem>
+  //   {props.children}
+  // </MorphingLineItem>
+  <div>
+    {props.children}
+  </div>
 );
 
+MorphingLineItemContainer.propTypes = {
+  children: React.PropTypes.arrayOf(React.PropTypes.node),
+};
+
+/*
 MorphingLineItemContainer.propTypes = {
   name: React.PropTypes.string.isRequired,
   amount: React.PropTypes.number.isRequired,
@@ -18,7 +22,7 @@ MorphingLineItemContainer.propTypes = {
   minPayment: React.PropTypes.number.isRequired,
   handleDeleteChanges: React.PropTypes.func.isRequired,
 };
-
+*/
 /*
 class MorphingLineItemContainer extends React.Component {
   constructor(props) {
