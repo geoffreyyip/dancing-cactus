@@ -47,7 +47,7 @@ class Main extends React.Component {
     };
 
     this.handleNewDebt = this.handleNewDebt.bind(this);
-    this.morphingHandler = this.morphingHandler.bind(this);
+    this.changeHandlers = this.changeHandlers.bind(this);
     this.deleteHandler = this.deleteHandler.bind(this);
   }
 
@@ -75,7 +75,7 @@ class Main extends React.Component {
   // - one to delete pending changes (reverting to the original debt)
   // - one to update pending changes (but not actually save them)
   // - one to commit pending changes (and overwrite the previous debt)
-  morphingHandler(index, field) {
+  changeHandlers(index, field) {
     return {
       handleDeleteChanges: () => {
         const newDebts = shallowCopyArray(this.state.debts);
@@ -87,7 +87,7 @@ class Main extends React.Component {
       },
 
       // FIXIT: this depends on the existence DOM attributes
-      // possible solution, have morphingHandler take an
+      // possible solution, have changeHandlers take an
       // optional {field} argument
       handleEditChanges: (event) => {
         console.log('handleEditChanges triggered');
@@ -153,7 +153,7 @@ class Main extends React.Component {
           debts={this.state.debts}
           headerInfo={this.state.headerInfo}
           handleNewDebt={this.handleNewDebt}
-          morphingHandler={this.morphingHandler}
+          changeHandlers={this.changeHandlers}
           deleteHandler={this.deleteHandler}
         />
       </div>

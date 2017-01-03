@@ -17,7 +17,7 @@ class DebtTable extends React.Component {
   // MorphingLineItemContainer and its children can be thought of as
   // controlled components, whose local values are synced up with the
   // Main.jsx state via passed in callbacks, also defined in Main.jsx
-  // Callbacks are generated with a morphingHandler method, which binds
+  // Callbacks are generated with a changeHandlers method, which binds
   // an index and a field name to each line item component. The index
   // corresponds to the Debt object's position in the Main.jsx state.
 
@@ -30,12 +30,12 @@ class DebtTable extends React.Component {
             key={fieldNo}
             style={styles.lineItem}
             value={loan.pendingChanges.name}
-            onChange={this.props.morphingHandler(lineNo, category.name).handleEditChanges}
+            onChange={this.props.changeHandlers(lineNo, category.name).handleEditChanges}
           />
         ))};
         <MorphingBar
-          onDeleteChanges={this.props.morphingHandler(lineNo).handleDeleteChanges}
-          onSaveChanges={this.props.morphingHandler(lineNo).handleSaveChanges}
+          onDeleteChanges={this.props.changeHandlers(lineNo).handleDeleteChanges}
+          onSaveChanges={this.props.changeHandlers(lineNo).handleSaveChanges}
         />
       </MorphingLineItemContainer>
     );
@@ -102,7 +102,7 @@ DebtTable.propTypes = {
     }),
   ),
   handleNewDebt: React.PropTypes.func.isRequired,
-  morphingHandler: React.PropTypes.func.isRequired,
+  changeHandlers: React.PropTypes.func.isRequired,
   deleteHandler: React.PropTypes.func.isRequired,
 };
 
