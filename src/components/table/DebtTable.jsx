@@ -18,58 +18,38 @@ class DebtTable extends React.Component {
   // controlled components, whose local values are synced up with the
   // Main.jsx state via passed in callbacks, also defined in Main.jsx
   // Callbacks are generated with a morphingHandler method, which binds
-  // an index to each line item component. The index corresponds to the
-  // Debt object's position in the Main.jsx state.
-  getMorphingLine(loan, index) {
+  // an index and a field name to each line item component. The index
+  // corresponds to the Debt object's position in the Main.jsx state.
+
+  // renders an input field for each category in the debt table
+  getMorphingLine(loan, lineNo) {
     return (
       <MorphingLineItemContainer style={styles.lineWrapper} key={loan.id}>
-        <input
-          style={styles.lineItem}
-          data-field="name"
-          value={loan.pendingChanges.name}
-          onChange={this.props.morphingHandler(index).handleEditChanges}
-        />
-        <input
-          style={styles.lineItem}
-          data-field="amount"
-          value={loan.pendingChanges.amount}
-          onChange={this.props.morphingHandler(index).handleEditChanges}
-        />
-        <input
-          style={styles.lineItem}
-          data-field="interestRate"
-          value={loan.pendingChanges.interestRate}
-          onChange={this.props.morphingHandler(index).handleEditChanges}
-        />
-        <input
-          style={styles.lineItem}
-          data-field="minPayment"
-          value={loan.pendingChanges.minPayment}
-          onChange={this.props.morphingHandler(index).handleEditChanges}
-        />
+        {this.props.headerInfo.map((category, fieldNo) => (
+          <input
+            key={fieldNo}
+            style={styles.lineItem}
+            value={loan.pendingChanges.name}
+            onChange={this.props.morphingHandler(lineNo, category.name).handleEditChanges}
+          />
+        ))};
         <MorphingBar
-          onDeleteChanges={this.props.morphingHandler(index).handleDeleteChanges}
-          onSaveChanges={this.props.morphingHandler(index).handleSaveChanges}
+          onDeleteChanges={this.props.morphingHandler(lineNo).handleDeleteChanges}
+          onSaveChanges={this.props.morphingHandler(lineNo).handleSaveChanges}
         />
       </MorphingLineItemContainer>
     );
   }
 
+  // renders a div element for each category in the debt table
   getDisplayLine(loan, index) {
     return (
       <DisplayLineItemContainer style={styles.lineWrapper} key={loan.id}>
-        <div style={styles.lineItem} data-field="name">
-          {loan.name}
-        </div>
-        <div style={styles.lineItem} data-field="amount">
-          {loan.amount}
-        </div>
-        <div style={styles.lineItem} data-field="interestRate">
-          {loan.interestRate}
-        </div>
-        <div style={styles.lineItem} data-field="minPayment">
-          {loan.minPayment}
-        </div>
+        {this.props.headerInfo.map((category, fieldNo) => (
+          <div key={fieldNo} style={styles.lineItem}>
+            {loan[category.name]}
+          </div>
+        ))};
         <ModificationBar
           onDeleteItem={this.props.deleteHandler(index).handleDeleteItem}
         />
@@ -115,6 +95,12 @@ DebtTable.propTypes = {
         minPayment: React.PropTypes.string,
       }),
     })).isRequired,
+  headerInfo: React.PropTypes.arrayOf(
+    React.PropTypes.shape({
+      name: React.PropTypes.string.isRequired,
+      type: React.PropTypes.func.isRequired,
+    }),
+  ),
   handleNewDebt: React.PropTypes.func.isRequired,
   morphingHandler: React.PropTypes.func.isRequired,
   deleteHandler: React.PropTypes.func.isRequired,

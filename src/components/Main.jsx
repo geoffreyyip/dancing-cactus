@@ -21,7 +21,7 @@ const mockData = {
     },
     { id: 23, name: 'Mortgage', amount: 43000, interestRate: 0.035, minPayment: 2100.00 },
   ],
-  debtsMetadata: [
+  headerInfo: [
     { name: 'name', type: String },
     { name: 'amount', type: Number },
     { name: 'interestRate', type: Number },
@@ -43,7 +43,7 @@ class Main extends React.Component {
 
     this.state = {
       debts: mockData.debts,
-      debtsMetadata: mockData.debtsMetadata,
+      headerInfo: mockData.headerInfo,
     };
 
     this.handleNewDebt = this.handleNewDebt.bind(this);
@@ -75,7 +75,7 @@ class Main extends React.Component {
   // - one to delete pending changes (reverting to the original debt)
   // - one to update pending changes (but not actually save them)
   // - one to commit pending changes (and overwrite the previous debt)
-  morphingHandler(index) {
+  morphingHandler(index, field) {
     return {
       handleDeleteChanges: () => {
         const newDebts = shallowCopyArray(this.state.debts);
@@ -92,7 +92,6 @@ class Main extends React.Component {
       handleEditChanges: (event) => {
         console.log('handleEditChanges triggered');
         const newDebts = shallowCopyArray(this.state.debts);
-        const field = event.target.dataset.field;
         newDebts[index].pendingChanges[field] = event.target.value;
 
         this.setState({
@@ -106,7 +105,7 @@ class Main extends React.Component {
         const newDebts = shallowCopyArray(this.state.debts);
         const lineItem = newDebts[index];
 
-        this.state.debtsMetadata.forEach((category) => {
+        this.state.headerInfo.forEach((category) => {
           let change = lineItem.pendingChanges[category.name];
           if (change === '') {
             throw Error(`${category.name} is blank!`);
@@ -152,6 +151,7 @@ class Main extends React.Component {
         <Graph />
         <DebtTable
           debts={this.state.debts}
+          headerInfo={this.state.headerInfo}
           handleNewDebt={this.handleNewDebt}
           morphingHandler={this.morphingHandler}
           deleteHandler={this.deleteHandler}
