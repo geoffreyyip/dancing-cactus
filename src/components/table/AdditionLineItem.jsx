@@ -1,6 +1,5 @@
 import React from 'react';
 
-import EntryCell from './EntryCell';
 import styles from '../../styles/tableStyles';
 
 class AdditionLineItem extends React.Component {
@@ -55,25 +54,25 @@ class AdditionLineItem extends React.Component {
   render() {
     return (
       <div style={styles.lineWrapper}>
-        <EntryCell
+        <input
           onChange={this.handleChange}
-          field="name"
-          display={this.state.name}
+          data-field="name"
+          value={this.state.name}
         />
-        <EntryCell
+        <input
           onChange={this.handleChange}
-          field="amount"
-          display={this.state.amount}
+          data-field="amount"
+          value={this.state.amount}
         />
-        <EntryCell
+        <input
           onChange={this.handleChange}
-          field="interestRate"
-          display={this.state.interestRate}
+          data-field="interestRate"
+          value={this.state.interestRate}
         />
-        <EntryCell
+        <input
           onChange={this.handleChange}
-          field="minPayment"
-          display={this.state.minPayment}
+          data-field="minPayment"
+          value={this.state.minPayment}
         />
         <div className="addition-bar" style={styles.lineItem}>
           <i className="fa fa-plus" aria-hidden="true" onClick={this.addNewDebt}> Add </i>
