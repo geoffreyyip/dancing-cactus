@@ -92,7 +92,6 @@ class DebtTable extends React.Component {
 DebtTable.propTypes = {
   debts: React.PropTypes.arrayOf(
     React.PropTypes.shape({
-      id: React.PropTypes.number.isRequired,
       name: React.PropTypes.string.isRequired,
       amount: React.PropTypes.number.isRequired,
       interestRate: React.PropTypes.number.isRequired,

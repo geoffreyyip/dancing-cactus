@@ -6,9 +6,8 @@ import '../styles/Main.css';
 
 const mockData = {
   debts: [
-    { id: 21, name: 'Car Loan', amount: 9000, interestRate: 0.05, minPayment: 620.23 },
-    { id: 22,
-      name: 'College Loan',
+    { name: 'Car Loan', amount: 9000, interestRate: 0.05, minPayment: 620.23 },
+    { name: 'College Loan',
       amount: 20000,
       interestRate: 0.07,
       minPayment: 1685.47,
@@ -19,7 +18,7 @@ const mockData = {
         minPayment: '2200.00',
       },
     },
-    { id: 23, name: 'Mortgage', amount: 43000, interestRate: 0.035, minPayment: 2100.00 },
+    { name: 'Mortgage', amount: 43000, interestRate: 0.035, minPayment: 2100.00 },
   ],
   headerInfo: [
     { name: 'name', type: String },
@@ -60,10 +59,6 @@ class Main extends React.Component {
     const newDebts = shallowCopyArray(this.state.debts);
     newDebts.push(liability);
 
-    // assign unique id to new liability
-    const last = newDebts.length - 1;
-    const currentMaxId = newDebts[last - 1].id;
-    newDebts[last].id = currentMaxId + 1;
 
     this.setState({
       debts: newDebts,
