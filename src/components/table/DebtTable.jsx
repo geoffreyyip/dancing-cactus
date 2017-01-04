@@ -83,7 +83,7 @@ class DebtTable extends React.Component {
             : this.getDisplayLine(loan, index)
           );
         })}
-        <AddDebtContainer onNewDebt={this.props.handleNewDebt} />
+        <AddDebtContainer onNewDebt={this.props.handleNewDebt} fields={this.props.headerInfo} />
       </div>
     );
   }

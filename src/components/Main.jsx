@@ -57,8 +57,27 @@ class Main extends React.Component {
   handleNewDebt(liability) {
     // shallow copy state to prevent direct manipulation of state
     const newDebts = shallowCopyArray(this.state.debts);
-    newDebts.push(liability);
 
+    // ensure valid input
+    // TODO: shallow copy the object and type coerce stuff within it
+    const newLineItem = {};
+    this.state.headerInfo.forEach((category) => {
+      const fieldName = category.name;
+      let change = liability[fieldName];
+      if (change === '') {
+        throw Error(`${fieldName} is blank!`);
+      }
+
+      if (category.type === Number) {
+        change = Number(change);
+        if (isNaN(change)) {
+          throw Error(`Numeric change required for ${fieldName}!`);
+        }
+      }
+      newLineItem[fieldName] = change;
+    });
+
+    newDebts.push(newLineItem);
 
     this.setState({
       debts: newDebts,

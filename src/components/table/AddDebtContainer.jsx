@@ -1,44 +1,41 @@
 import React from 'react';
 
-import styles from '../../styles/tableStyles';
-
 class AddDebtContainer extends React.Component {
   constructor(props) {
     super(props);
 
-    this.state = {
-      name: 'college',
-      amount: '2200',
-      interestRate: '0.05',
-      minPayment: '85',
-    };
+    // initialize a state property for each Debts field
+    this.state = {};
+    props.fields.forEach((field) => {
+      this.state[field.name] = '';
+    });
+
     this.addNewDebt = this.addNewDebt.bind(this);
-    this.handleChange = this.handleChange.bind(this);
+    this.handleChangeTo = this.handleChangeTo.bind(this);
     this.clearState = this.clearState.bind(this);
   }
 
-  // TODO: add type checking to ensure valid input to Main.jsx's callback
   addNewDebt() {
-    const newDebt = {
-      name: this.state.name,
-      amount: Number(this.state.amount),
-      interestRate: Number(this.state.interestRate),
-      minPayment: Number(this.state.minPayment),
-    };
+    const newDebt = {};
+    this.props.fields.forEach((field) => {
+      const fieldName = field.name;
+      newDebt[fieldName] = this.state[fieldName];
+    });
     this.props.onNewDebt(newDebt);
   }
 
-  // coupled to EntryCell
+  // coupled to input elements
   // assumes component has properties corresponding to this component's state
   // read the data-field property bound to the EntryCell's object, that's the key
   // read the value property, that's the new value
   // modify state
-  handleChange(event) {
-    const stateChange = {};
-    const field = event.target.dataset.field;
-    stateChange[field] = event.target.value;
+  handleChangeTo(fieldName) {
+    return (event) => {
+      const change = {};
+      change[fieldName] = event.target.value;
 
-    this.setState(stateChange);
+      this.setState(change);
+    };
   }
 
   // sets all state properties to empty strings
@@ -52,29 +49,17 @@ class AddDebtContainer extends React.Component {
   }
 
   render() {
+    const inputItems = this.props.fields.map((field, index) => (
+      <input
+        key={index}
+        onChange={this.handleChangeTo(field.name)}
+        value={this.state[field.name]}
+      />
+    ));
     return (
-      <div style={styles.lineWrapper}>
-        <input
-          onChange={this.handleChange}
-          data-field="name"
-          value={this.state.name}
-        />
-        <input
-          onChange={this.handleChange}
-          data-field="amount"
-          value={this.state.amount}
-        />
-        <input
-          onChange={this.handleChange}
-          data-field="interestRate"
-          value={this.state.interestRate}
-        />
-        <input
-          onChange={this.handleChange}
-          data-field="minPayment"
-          value={this.state.minPayment}
-        />
-        <div className="addition-bar" style={styles.lineItem}>
+      <div>
+        {inputItems}
+        <div className="addition-bar">
           <i className="fa fa-plus" aria-hidden="true" onClick={this.addNewDebt}> Add </i>
           <i className="fa fa-ban" aria-hidden="true" onClick={this.clearState}> Reset </i>
         </div>
@@ -85,6 +70,12 @@ class AddDebtContainer extends React.Component {
 
 AddDebtContainer.propTypes = {
   onNewDebt: React.PropTypes.func.isRequired,
+  fields: React.PropTypes.arrayOf(
+    React.PropTypes.shape({
+      name: React.PropTypes.string.isRequired,
+      type: React.PropTypes.func.isRequired,
+    }),
+  ),
 };
 
 export default AddDebtContainer;
