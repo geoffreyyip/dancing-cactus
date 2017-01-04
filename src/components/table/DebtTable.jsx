@@ -1,6 +1,6 @@
 import React from 'react';
 import LineItemWrapper from './LineItemWrapper';
-import AdditionLineItem from './AdditionLineItem';
+import AddDebtContainer from './AddDebtContainer';
 import MorphingBar from './MorphingBar';
 import ModificationBar from './ModificationBar';
 
@@ -69,7 +69,7 @@ class DebtTable extends React.Component {
   For each Debt object in Main.jsx state, check whether pending changes exist.
   Render a display line item for Debt objects without pending changes.
   Render a morphing line item for Debt objects with pending changes.
-  Attach an AdditionLineItem at the end; pass down callback to add a new debt.
+  Attach an AddDebtContainer at the end; pass down callback to add a new debt.
   */
   render() {
     return (
@@ -83,7 +83,7 @@ class DebtTable extends React.Component {
             : this.getDisplayLine(loan, index)
           );
         })}
-        <AdditionLineItem onNewDebt={this.props.handleNewDebt} />
+        <AddDebtContainer onNewDebt={this.props.handleNewDebt} />
       </div>
     );
   }

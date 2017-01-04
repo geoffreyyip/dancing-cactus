@@ -2,7 +2,7 @@ import React from 'react';
 
 import styles from '../../styles/tableStyles';
 
-class AdditionLineItem extends React.Component {
+class AddDebtContainer extends React.Component {
   constructor(props) {
     super(props);
 
@@ -83,8 +83,8 @@ class AdditionLineItem extends React.Component {
   }
 }
 
-AdditionLineItem.propTypes = {
+AddDebtContainer.propTypes = {
   onNewDebt: React.PropTypes.func.isRequired,
 };
 
-export default AdditionLineItem;
+export default AddDebtContainer;
