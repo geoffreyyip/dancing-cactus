@@ -1,5 +1,5 @@
 import React from 'react';
-import LineItemWrapper from './LineItemWrapper';
+import FlexboxWrapper from './FlexboxWrapper';
 import AddDebtContainer from './AddDebtContainer';
 import MorphingBar from './MorphingBar';
 import ModificationBar from './ModificationBar';
@@ -31,13 +31,13 @@ class DebtTable extends React.Component {
     ));
 
     return (
-      <LineItemWrapper key={loan.id}>
+      <FlexboxWrapper key={loan.id}>
         {lineItem}
         <MorphingBar
           onDeleteChanges={this.props.changeHandlers(lineNo).handleDeleteChanges}
           onSaveChanges={this.props.changeHandlers(lineNo).handleSaveChanges}
         />
-      </LineItemWrapper>
+      </FlexboxWrapper>
     );
   }
 
@@ -54,13 +54,13 @@ class DebtTable extends React.Component {
     ));
 
     return (
-      <LineItemWrapper key={loan.id}>
+      <FlexboxWrapper key={loan.id}>
         {lineItem}
         <ModificationBar
           onDeleteItem={this.props.deleteHandler(index).handleDeleteItem}
           onStartChanges={this.props.changeHandlers(index).handleChangeItem}
         />
-      </LineItemWrapper>
+      </FlexboxWrapper>
 
     );
   }

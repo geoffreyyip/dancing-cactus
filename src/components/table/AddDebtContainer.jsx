@@ -1,5 +1,5 @@
 import React from 'react';
-import LineItemWrapper from './LineItemWrapper';
+import FlexboxWrapper from './FlexboxWrapper';
 
 class AddDebtContainer extends React.Component {
   constructor(props) {
@@ -58,13 +58,13 @@ class AddDebtContainer extends React.Component {
       />
     ));
     return (
-      <LineItemWrapper>
+      <FlexboxWrapper>
         {inputItems}
         <div className="addition-bar">
           <i className="fa fa-plus" aria-hidden="true" onClick={this.addNewDebt}> Add </i>
           <i className="fa fa-ban" aria-hidden="true" onClick={this.clearState}> Reset </i>
         </div>
-      </LineItemWrapper>
+      </FlexboxWrapper>
     );
   }
 }
