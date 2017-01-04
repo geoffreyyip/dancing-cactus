@@ -70,11 +70,16 @@ class Main extends React.Component {
     });
   }
 
-  // return closures that bind to a given index within the Debts state array
-  // closure contains three functions
-  // - one to delete pending changes (reverting to the original debt)
-  // - one to update pending changes (but not actually save them)
-  // - one to commit pending changes (and overwrite the previous debt)
+  /*
+  return closures that bind to a given index (and optionally field)
+  within the Debts state
+
+  closure contains four functions
+  - one to delete pending changes (reverting to the original debt)
+  - one to update pending changes (but not actually save them)
+  - one to commit pending changes (and overwrite the previous debt)
+  - one to start pending changes (invoked from a display line item)
+  */
   changeHandlers(index, field) {
     return {
       handleDeleteChanges: () => {
@@ -92,8 +97,6 @@ class Main extends React.Component {
         this.setState({ debts: newDebts });
       },
 
-      // FIXIT: where do I handle errors? Is it okay to handle errors
-      // in child components?
       handleSaveChanges: () => {
         console.log('handleSaveChanges triggered');
         const newDebts = shallowCopyArray(this.state.debts);

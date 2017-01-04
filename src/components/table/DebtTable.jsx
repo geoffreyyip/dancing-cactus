@@ -12,15 +12,16 @@ class DebtTable extends React.Component {
     this.getDisplayLine = this.getDisplayLine.bind(this);
   }
 
-  // MorphingLineItemContainer and its children can be thought of as
-  // controlled components, whose local values are synced up with the
-  // Main.jsx state via passed in callbacks, also defined in Main.jsx
-  // Callbacks are generated with a changeHandlers method, which binds
-  // an index and a field name to each line item component. The index
-  // corresponds to the Debt object's position in the Main.jsx state.
+  /*
+  Create controlled components that sync up to Main.jsx state with
+  changeHandlers's methods. Methods are bound to an given loan object
+  (and optionally a field) at render time.
 
-  // renders an input field for each category in the debt table
+  Pass down callbacks to delete and save pending changes to a trash
+  and an arrow-back icon respectively.
+  */
   getMorphingLine(loan, lineNo) {
+    // render an input field for each category in the debt table
     const lineItems = this.props.headerInfo.map((category, fieldNo) => (
       <input
         key={fieldNo}
@@ -28,6 +29,7 @@ class DebtTable extends React.Component {
         onChange={this.props.changeHandlers(lineNo, category.name).handleEditChanges}
       />
     ));
+
     return (
       <LineItemWrapper key={loan.id}>
         {lineItems}
@@ -39,13 +41,18 @@ class DebtTable extends React.Component {
     );
   }
 
-  // renders a div element for each category in the debt table
+  /*
+  Pass down callbacks to edit and delete debt entrys to a pencil and
+  trash icon respectively.
+  */
   getDisplayLine(loan, index) {
+    // render a div element for each category in the debt table
     const lineItems = this.props.headerInfo.map((category, fieldNo) => (
       <div key={fieldNo}>
         {loan[category.name]}
       </div>
     ));
+
     return (
       <LineItemWrapper key={loan.id}>
         {lineItems}
@@ -58,10 +65,12 @@ class DebtTable extends React.Component {
     );
   }
 
-  // checks whether each Debt object has any pending changes on it
-  // renders a MorphingLineItem for those with pending changes and a
-  // DisplayLineItem for those without
-  // render a AdditionLineItem at the end for users to add new debts with
+  /*
+  For each Debt object in Main.jsx state, check whether pending changes exist.
+  Render a display line item for Debt objects without pending changes.
+  Render a morphing line item for Debt objects with pending changes.
+  Attach an AdditionLineItem at the end; pass down callback to add a new debt.
+  */
   render() {
     return (
       <div>

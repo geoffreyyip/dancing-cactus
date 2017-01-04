@@ -1,6 +1,7 @@
 import React from 'react';
 import styles from '../../styles/tableStyles';
 
+// decorate direct child elements with flexbox styling
 const LineItemWrapper = (props) => {
   const addLineItemStyle = child => React.cloneElement(child, { style: styles.lineItem });
   const items = React.Children.map(props.children, addLineItemStyle);
