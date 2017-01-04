@@ -1,10 +1,8 @@
 import React from 'react';
-import DisplayLineItemContainer from '../../containers/table/DisplayLineItemContainer';
-import MorphingLineItemContainer from '../../containers/table/MorphingLineItemContainer';
+import LineItemWrapper from './LineItemWrapper';
 import AdditionLineItem from './AdditionLineItem';
 import MorphingBar from './MorphingBar';
 import ModificationBar from './ModificationBar';
-import styles from '../../styles/tableStyles';
 
 class DebtTable extends React.Component {
   constructor(props) {
@@ -23,38 +21,39 @@ class DebtTable extends React.Component {
 
   // renders an input field for each category in the debt table
   getMorphingLine(loan, lineNo) {
+    const lineItems = this.props.headerInfo.map((category, fieldNo) => (
+      <input
+        key={fieldNo}
+        value={loan.pendingChanges[category.name]}
+        onChange={this.props.changeHandlers(lineNo, category.name).handleEditChanges}
+      />
+    ));
     return (
-      <MorphingLineItemContainer style={styles.lineWrapper} key={loan.id}>
-        {this.props.headerInfo.map((category, fieldNo) => (
-          <input
-            key={fieldNo}
-            style={styles.lineItem}
-            value={loan.pendingChanges[category.name]}
-            onChange={this.props.changeHandlers(lineNo, category.name).handleEditChanges}
-          />
-        ))};
+      <LineItemWrapper key={loan.id}>
+        {lineItems}
         <MorphingBar
           onDeleteChanges={this.props.changeHandlers(lineNo).handleDeleteChanges}
           onSaveChanges={this.props.changeHandlers(lineNo).handleSaveChanges}
         />
-      </MorphingLineItemContainer>
+      </LineItemWrapper>
     );
   }
 
   // renders a div element for each category in the debt table
   getDisplayLine(loan, index) {
+    const lineItems = this.props.headerInfo.map((category, fieldNo) => (
+      <div key={fieldNo}>
+        {loan[category.name]}
+      </div>
+    ));
     return (
-      <DisplayLineItemContainer style={styles.lineWrapper} key={loan.id}>
-        {this.props.headerInfo.map((category, fieldNo) => (
-          <div key={fieldNo} style={styles.lineItem}>
-            {loan[category.name]}
-          </div>
-        ))};
+      <LineItemWrapper key={loan.id}>
+        {lineItems}
         <ModificationBar
           onDeleteItem={this.props.deleteHandler(index).handleDeleteItem}
           onStartChanges={this.props.changeHandlers(index).handleChangeItem}
         />
-      </DisplayLineItemContainer>
+      </LineItemWrapper>
 
     );
   }
