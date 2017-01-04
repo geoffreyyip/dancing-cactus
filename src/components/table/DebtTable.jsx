@@ -22,7 +22,7 @@ class DebtTable extends React.Component {
   */
   getMorphingLine(loan, lineNo) {
     // render an input field for each category in the debt table
-    const lineItems = this.props.headerInfo.map((category, fieldNo) => (
+    const lineItem = this.props.headerInfo.map((category, fieldNo) => (
       <input
         key={fieldNo}
         value={loan.pendingChanges[category.name]}
@@ -32,7 +32,7 @@ class DebtTable extends React.Component {
 
     return (
       <LineItemWrapper key={loan.id}>
-        {lineItems}
+        {lineItem}
         <MorphingBar
           onDeleteChanges={this.props.changeHandlers(lineNo).handleDeleteChanges}
           onSaveChanges={this.props.changeHandlers(lineNo).handleSaveChanges}
@@ -47,7 +47,7 @@ class DebtTable extends React.Component {
   */
   getDisplayLine(loan, index) {
     // render a div element for each category in the debt table
-    const lineItems = this.props.headerInfo.map((category, fieldNo) => (
+    const lineItem = this.props.headerInfo.map((category, fieldNo) => (
       <div key={fieldNo}>
         {loan[category.name]}
       </div>
@@ -55,7 +55,7 @@ class DebtTable extends React.Component {
 
     return (
       <LineItemWrapper key={loan.id}>
-        {lineItems}
+        {lineItem}
         <ModificationBar
           onDeleteItem={this.props.deleteHandler(index).handleDeleteItem}
           onStartChanges={this.props.changeHandlers(index).handleChangeItem}
