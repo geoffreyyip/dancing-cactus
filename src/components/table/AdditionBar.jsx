@@ -3,9 +3,14 @@ import IconWrapper from './IconWrapper';
 
 const AdditionBar = () => (
   <IconWrapper>
-    <i className="fa fa-plus" aria-hidden="true"> Add </i>
-    <i className="fa fa-ban" aria-hidden="true"> Reset </i>
+    <icon className="fa-plus" aria-hidden="true" onClick="handleNewDebt"> Add </icon>
+    <icon className="fa-ban" aria-hidden="true" onClick="handleClearState"> Reset </icon>
   </IconWrapper>
 );
+
+AdditionBar.propTypes = {
+  handleNewDebt: React.PropTypes.func.isRequired,
+  handleClearState: React.PropTypes.func.isRequired,
+};
 
 export default AdditionBar;

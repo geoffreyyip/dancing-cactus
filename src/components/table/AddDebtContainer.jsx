@@ -1,5 +1,6 @@
 import React from 'react';
 import FlexboxWrapper from './FlexboxWrapper';
+import AdditionBar from './AdditionBar';
 
 class AddDebtContainer extends React.Component {
   constructor(props) {
@@ -60,10 +61,10 @@ class AddDebtContainer extends React.Component {
     return (
       <FlexboxWrapper>
         {inputItems}
-        <div className="addition-bar">
-          <i className="fa fa-plus" aria-hidden="true" onClick={this.addNewDebt}> Add </i>
-          <i className="fa fa-ban" aria-hidden="true" onClick={this.clearState}> Reset </i>
-        </div>
+        <AdditionBar>
+          handleNewDebt={this.addNewDebt}
+          handleClearState={this.clearState}
+        </AdditionBar>
       </FlexboxWrapper>
     );
   }
