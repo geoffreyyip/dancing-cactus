@@ -58,7 +58,7 @@ class DebtTable extends React.Component {
     ));
 
     return (
-      <FlexboxWrapper key={loan.id}>
+      <FlexboxWrapper key={lineNo}>
         {lineItem}
         <MorphingBar
           onDeleteChanges={this.props.changeHandlers(lineNo).handleDeleteChanges}
@@ -72,7 +72,7 @@ class DebtTable extends React.Component {
   Pass down callbacks to edit and delete debt entrys to a pencil and
   trash icon respectively.
   */
-  getDisplayLine(loan, index) {
+  getDisplayLine(loan, lineNo) {
     // render a div element for each category in the debt table
     const lineItem = this.props.headerInfo.map((category, fieldNo) => (
       <div key={fieldNo} style={styles.displayLine}>
@@ -81,11 +81,11 @@ class DebtTable extends React.Component {
     ));
 
     return (
-      <FlexboxWrapper key={loan.id}>
+      <FlexboxWrapper key={lineNo}>
         {lineItem}
         <ModificationBar
-          onDeleteItem={this.props.deleteHandler(index).handleDeleteItem}
-          onStartChanges={this.props.changeHandlers(index).handleChangeItem}
+          onDeleteItem={this.props.deleteHandler(lineNo).handleDeleteItem}
+          onStartChanges={this.props.changeHandlers(lineNo).handleChangeItem}
         />
       </FlexboxWrapper>
 
