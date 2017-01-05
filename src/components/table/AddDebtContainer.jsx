@@ -43,6 +43,7 @@ class AddDebtContainer extends React.Component {
       newDebt[fieldName] = this.state[fieldName];
     });
     this.props.onNewDebt(newDebt);
+    this.clearState();
   }
 
   // coupled to input elements
@@ -82,10 +83,10 @@ class AddDebtContainer extends React.Component {
     return (
       <FlexboxWrapper>
         {inputItems}
-        <AdditionBar>
+        <AdditionBar
           handleNewDebt={this.addNewDebt}
           handleClearState={this.clearState}
-        </AdditionBar>
+        />
       </FlexboxWrapper>
     );
   }

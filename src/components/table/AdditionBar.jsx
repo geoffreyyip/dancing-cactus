@@ -1,10 +1,10 @@
 import React from 'react';
 import IconWrapper from './IconWrapper';
 
-const AdditionBar = () => (
+const AdditionBar = props => (
   <IconWrapper>
-    <icon className="fa-plus" aria-hidden="true" onClick="handleNewDebt"> Add </icon>
-    <icon className="fa-ban" aria-hidden="true" onClick="handleClearState"> Reset </icon>
+    <icon className="fa-plus" aria-hidden="true" onClick={props.handleNewDebt}> Add </icon>
+    <icon className="fa-ban" aria-hidden="true" onClick={props.handleClearState}> Reset </icon>
   </IconWrapper>
 );
 
