@@ -16,8 +16,7 @@ const cellItemBase = {
 const styles = {
   // copies properties from second arg to first arg
   morphingLine: Object.assign({
-    border: 'solid 1px cornflowerblue',
-    backgroundColor: 'cornflowerblue',
+    border: '',
   }, cellItemBase),
   displayLine: Object.assign({
     borderTop: 'solid 1px grey',

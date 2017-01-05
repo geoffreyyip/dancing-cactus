@@ -2,6 +2,25 @@ import React from 'react';
 import FlexboxWrapper from './FlexboxWrapper';
 import AdditionBar from './AdditionBar';
 
+const cellItemBase = {
+  boxSizing: 'border-box',
+  width: '100%',
+  height: '100%',
+  padding: '5%',
+  fontFamily: 'inherit',
+  fontSize: '100%',
+};
+
+const styles = {
+  // copies properties from second arg to first arg
+  addLine: Object.assign({
+    borderTop: '',
+    borderBottom: '',
+    borderLeft: '',
+    borderRight: '',
+  }, cellItemBase),
+};
+
 class AddDebtContainer extends React.Component {
   constructor(props) {
     super(props);
@@ -53,6 +72,8 @@ class AddDebtContainer extends React.Component {
   render() {
     const inputItems = this.props.fields.map((field, index) => (
       <input
+        style={styles.addLine}
+        placeholder={field.name}
         key={index}
         onChange={this.handleChangeTo(field.name)}
         value={this.state[field.name]}
