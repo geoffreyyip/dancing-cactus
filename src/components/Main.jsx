@@ -21,10 +21,10 @@ const mockData = {
     { name: 'Mortgage', amount: 43000, interestRate: 0.035, minPayment: 2100.00 },
   ],
   headerInfo: [
-    { name: 'name', type: String },
-    { name: 'amount', type: Number },
-    { name: 'interestRate', type: Number },
-    { name: 'minPayment', type: Number },
+    { name: 'name', type: String, displayString: 'Name' },
+    { name: 'amount', type: Number, displayString: 'Amount' },
+    { name: 'interestRate', type: Number, displayString: 'Interest Rate' },
+    { name: 'minPayment', type: Number, displayString: 'Minimum Payment' },
   ],
 };
 

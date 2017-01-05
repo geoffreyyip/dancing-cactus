@@ -24,6 +24,10 @@ const styles = {
     borderLeft: 'none',
     borderRight: 'none',
   }, cellItemBase),
+  headerLine: Object.assign({
+    fontWeight: 'bold',
+    background: 'darkgrey',
+  }, cellItemBase),
 };
 
 class DebtTable extends React.Component {
@@ -88,6 +92,19 @@ class DebtTable extends React.Component {
     );
   }
 
+  getHeaderLine() {
+    const lineItem = this.props.headerInfo.map((category, fieldNo) => (
+      <div key={fieldNo} style={styles.headerLine}>
+        {category.displayString}
+      </div>
+    ));
+    return (
+      <FlexboxWrapper>
+        {lineItem}
+      </FlexboxWrapper>
+    );
+  }
+
   /*
   For each Debt object in Main.jsx state, check whether pending changes exist.
   Render a display line item for Debt objects without pending changes.
@@ -95,6 +112,16 @@ class DebtTable extends React.Component {
   Attach an AddDebtContainer at the end; pass down callback to add a new debt.
   */
   render() {
+    const lines = this.props.debts.map((loan, index) => {
+      const has = Object.prototype.hasOwnProperty;
+      const hasPendingChanges = has.call(loan, 'pendingChanges');
+      return (
+        hasPendingChanges
+        ? this.getMorphingLine(loan, index)
+        : this.getDisplayLine(loan, index)
+      );
+    });
+    const header = this.getHeaderLine();
     return (
       <div
         style={{
@@ -103,15 +130,8 @@ class DebtTable extends React.Component {
           minWidth: '900px',
         }}
       >
-        {this.props.debts.map((loan, index) => {
-          const has = Object.prototype.hasOwnProperty;
-          const hasPendingChanges = has.call(loan, 'pendingChanges');
-          return (
-            hasPendingChanges
-            ? this.getMorphingLine(loan, index)
-            : this.getDisplayLine(loan, index)
-          );
-        })}
+        {header}
+        {lines}
         <AddDebtContainer onNewDebt={this.props.handleNewDebt} fields={this.props.headerInfo} />
       </div>
     );
