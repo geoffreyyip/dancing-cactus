@@ -1,11 +1,12 @@
 import React from 'react';
 import '../../styles/font-awesome-4.7.0/css/font-awesome.css';
+import IconWrapper from './IconWrapper';
 
 const ModificationBar = props => (
-  <div className="modification-bar">
-    <i className="fa fa-pencil" aria-hidden="true" onClick={props.onStartChanges} />
-    <i className="fa fa-trash" aria-hidden="true" onClick={props.onDeleteItem} />
-  </div>
+  <IconWrapper>
+    <icon className="fa-pencil" aria-hidden="true" onClick={props.onStartChanges}> Edit </icon>
+    <icon className="fa-trash" aria-hidden="true" onClick={props.onDeleteItem}> Delete </icon>
+  </IconWrapper>
 );
 
 ModificationBar.propTypes = {

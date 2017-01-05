@@ -3,15 +3,13 @@ const styles = {
     display: 'flex',
     flexDirection: 'row',
     flexWrap: 'nowrap',
-    minWidth: '900px',
     marginLeft: '15%',
     marginRight: '15%',
-    marginTop: '0.5em',
-    marginBottom: '0.5em',
+    alignItems: 'center',
   },
   lineItem: {
-    flex: 1,
-    border: 'solid 1px cornflowerblue',
+    flexGrow: 1,
+    flexBasis: '20%',
   },
 };
 

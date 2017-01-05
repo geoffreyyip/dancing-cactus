@@ -4,6 +4,29 @@ import AddDebtContainer from './AddDebtContainer';
 import MorphingBar from './MorphingBar';
 import ModificationBar from './ModificationBar';
 
+const cellItemBase = {
+  boxSizing: 'border-box',
+  width: '100%',
+  height: '100%',
+  padding: '5%',
+  fontFamily: 'inherit',
+  fontSize: '100%',
+};
+
+const styles = {
+  // copies properties from second arg to first arg
+  morphingLine: Object.assign({
+    border: 'solid 1px cornflowerblue',
+    backgroundColor: 'cornflowerblue',
+  }, cellItemBase),
+  displayLine: Object.assign({
+    borderTop: 'solid 1px grey',
+    borderBottom: 'solid 1px grey',
+    borderLeft: 'none',
+    borderRight: 'none',
+  }, cellItemBase),
+};
+
 class DebtTable extends React.Component {
   constructor(props) {
     super(props);
@@ -24,6 +47,7 @@ class DebtTable extends React.Component {
     // render an input field for each category in the debt table
     const lineItem = this.props.headerInfo.map((category, fieldNo) => (
       <input
+        style={styles.morphingLine}
         key={fieldNo}
         value={loan.pendingChanges[category.name]}
         onChange={this.props.changeHandlers(lineNo, category.name).handleEditChanges}
@@ -48,7 +72,7 @@ class DebtTable extends React.Component {
   getDisplayLine(loan, index) {
     // render a div element for each category in the debt table
     const lineItem = this.props.headerInfo.map((category, fieldNo) => (
-      <div key={fieldNo}>
+      <div key={fieldNo} style={styles.displayLine}>
         {loan[category.name]}
       </div>
     ));
@@ -73,7 +97,13 @@ class DebtTable extends React.Component {
   */
   render() {
     return (
-      <div>
+      <div
+        style={{
+          fontSize: '20px',
+          fontFamily: 'Ubuntu',
+          minWidth: '900px',
+        }}
+      >
         {this.props.debts.map((loan, index) => {
           const has = Object.prototype.hasOwnProperty;
           const hasPendingChanges = has.call(loan, 'pendingChanges');

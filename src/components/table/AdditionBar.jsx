@@ -1,10 +1,11 @@
 import React from 'react';
+import IconWrapper from './IconWrapper';
 
 const AdditionBar = () => (
-  <div className="addition-bar">
+  <IconWrapper>
     <i className="fa fa-plus" aria-hidden="true"> Add </i>
     <i className="fa fa-ban" aria-hidden="true"> Reset </i>
-  </div>
+  </IconWrapper>
 );
 
 export default AdditionBar;

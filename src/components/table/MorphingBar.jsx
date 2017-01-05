@@ -1,10 +1,11 @@
 import React from 'react';
+import IconWrapper from './IconWrapper';
 
 const MorphingBar = props => (
-  <div>
-    <i className="fa fa-floppy-o" aria-hidden="true" onClick={props.onSaveChanges} />
-    <i className="fa fa-undo" aria-hidden="true" onClick={props.onDeleteChanges} />
-  </div>
+  <IconWrapper>
+    <icon className="fa-floppy-o" aria-hidden="true" onClick={props.onSaveChanges}> Save </icon>
+    <icon className="fa-undo" aria-hidden="true" onClick={props.onDeleteChanges}> Revert </icon>
+  </IconWrapper>
 );
 
 MorphingBar.propTypes = {
