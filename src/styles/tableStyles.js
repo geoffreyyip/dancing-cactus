@@ -8,7 +8,7 @@ const styles = {
     alignItems: 'center',
   },
   lineItem: {
-    flexGrow: 1,
+    flexGrow: 0,
     flexBasis: '20%',
   },
 };
