@@ -153,9 +153,10 @@ const getPaymentSchedule = function getPaymentSchedule(debts, accelerator = 0, p
   const dues = prioritize(debts, payoffMethod).map(addSchedule);
 
   // repeat until all debts hit zero
+  let hasRemainingDebt;
   do {
     let extra = accelerator;
-
+    hasRemainingDebt = true;
     dues.forEach((debt) => {
       const monthlyFee = debt.minPayment;
       const rate = debt.interestRate;
@@ -166,7 +167,17 @@ const getPaymentSchedule = function getPaymentSchedule(debts, accelerator = 0, p
 
       debt.schedule.push(currMonth);
     });
-  } while (last(last(dues).schedule).leftover > 0.0001);
+
+    dues.forEach((debt) => {
+      if (extra) {
+        let currMonth = debt.schedule.pop();
+        ({ extra, currMonth } = payExtra(currMonth, extra));
+        debt.schedule.push(currMonth);
+      }
+    });
+
+    if (extra) hasRemainingDebt = false;
+  } while (hasRemainingDebt);
 
   return dues;
 };

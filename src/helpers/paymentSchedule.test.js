@@ -71,6 +71,18 @@ describe('getPaymentSchedule', () => {
     });
   });
 
+  it('should not stop even when lowest prioirity debt gets paid first', () => {
+    sampleDebts = [
+      { name: 'College Loan', amount: 20000, interestRate: 0.07, minPayment: 1685.47 },
+      { name: 'Car Loan', amount: 17000, interestRate: 0.032, minPayment: 2200.00 },
+      { name: 'Mortgage', amount: 43000, interestRate: 0.035, minPayment: 2100.00 },
+    ];
+    const debts = getPaymentSchedule(sampleDebts);
+    debts.forEach((debt) => {
+      expect(debt.schedule.pop().leftover).to.be.closeTo(0, 0.00001);
+    });
+  });
+
   it('should reduce debts over time', () => {
     const debts = getPaymentSchedule(sampleDebts);
     const debt = debts[0];
