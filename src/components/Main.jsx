@@ -171,7 +171,9 @@ class Main extends React.Component {
   render() {
     return (
       <div>
-        <Graph />
+        <Graph
+          debts={this.state.debts}
+        />
         <DebtTable
           debts={this.state.debts}
           headerInfo={this.state.headerInfo}
