@@ -76,6 +76,7 @@ describe('getPaymentSchedule', () => {
       { name: 'College Loan', amount: 20000, interestRate: 0.07, minPayment: 1685.47 },
       { name: 'Car Loan', amount: 17000, interestRate: 0.032, minPayment: 2200.00 },
       { name: 'Mortgage', amount: 43000, interestRate: 0.035, minPayment: 2100.00 },
+      { name: 'Low-prioirty debt', amount: 0.01, interestRate: 0.01, minPayment: 0.01},
     ];
     const debts = getPaymentSchedule(sampleDebts);
     debts.forEach((debt) => {
