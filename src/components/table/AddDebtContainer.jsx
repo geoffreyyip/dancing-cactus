@@ -1,25 +1,6 @@
 import React from 'react';
-import FlexboxWrapper from './FlexboxWrapper';
+import LineWrapper from './LineWrapper';
 import AdditionBar from './AdditionBar';
-
-const cellItemBase = {
-  boxSizing: 'border-box',
-  width: '100%',
-  height: '100%',
-  padding: '5%',
-  fontFamily: 'inherit',
-  fontSize: '100%',
-};
-
-const styles = {
-  // copies properties from second arg to first arg
-  addLine: Object.assign({
-    borderTop: '',
-    borderBottom: '',
-    borderLeft: '',
-    borderRight: '',
-  }, cellItemBase),
-};
 
 class AddDebtContainer extends React.Component {
   constructor(props) {
@@ -73,7 +54,7 @@ class AddDebtContainer extends React.Component {
   render() {
     const inputItems = this.props.fields.map((field, index) => (
       <input
-        style={styles.addLine}
+        className="tableCell tableCell-add"
         placeholder={field.name}
         key={index}
         onChange={this.handleChangeTo(field.name)}
@@ -81,13 +62,13 @@ class AddDebtContainer extends React.Component {
       />
     ));
     return (
-      <FlexboxWrapper>
+      <LineWrapper>
         {inputItems}
         <AdditionBar
           handleNewDebt={this.addNewDebt}
           handleClearState={this.clearState}
         />
-      </FlexboxWrapper>
+      </LineWrapper>
     );
   }
 }

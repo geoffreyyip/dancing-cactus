@@ -1,34 +1,8 @@
 import React from 'react';
-import FlexboxWrapper from './FlexboxWrapper';
+import LineWrapper from './LineWrapper';
 import AddDebtContainer from './AddDebtContainer';
 import MorphingBar from './MorphingBar';
 import ModificationBar from './ModificationBar';
-
-const cellItemBase = {
-  boxSizing: 'border-box',
-  width: '100%',
-  height: '100%',
-  padding: '5%',
-  fontFamily: 'inherit',
-  fontSize: '100%',
-};
-
-const styles = {
-  // copies properties from second arg to first arg
-  morphingLine: Object.assign({
-    border: '',
-  }, cellItemBase),
-  displayLine: Object.assign({
-    borderTop: 'solid 1px grey',
-    borderBottom: 'solid 1px grey',
-    borderLeft: 'none',
-    borderRight: 'none',
-  }, cellItemBase),
-  headerLine: Object.assign({
-    fontWeight: 'bold',
-    background: 'darkgrey',
-  }, cellItemBase),
-};
 
 class DebtTable extends React.Component {
   constructor(props) {
@@ -50,7 +24,7 @@ class DebtTable extends React.Component {
     // render an input field for each category in the debt table
     const lineItem = this.props.headerInfo.map((category, fieldNo) => (
       <input
-        style={styles.morphingLine}
+        className="tableCell tableCell-morphing"
         key={fieldNo}
         value={loan.pendingChanges[category.name]}
         onChange={this.props.changeHandlers(lineNo, category.name).handleEditChanges}
@@ -58,13 +32,13 @@ class DebtTable extends React.Component {
     ));
 
     return (
-      <FlexboxWrapper key={lineNo}>
+      <LineWrapper key={lineNo}>
         {lineItem}
         <MorphingBar
           onDeleteChanges={this.props.changeHandlers(lineNo).handleDeleteChanges}
           onSaveChanges={this.props.changeHandlers(lineNo).handleSaveChanges}
         />
-      </FlexboxWrapper>
+      </LineWrapper>
     );
   }
 
@@ -75,33 +49,33 @@ class DebtTable extends React.Component {
   getDisplayLine(loan, lineNo) {
     // render a div element for each category in the debt table
     const lineItem = this.props.headerInfo.map((category, fieldNo) => (
-      <div key={fieldNo} style={styles.displayLine}>
+      <div key={fieldNo} className="tableCell tableCell-display">
         {loan[category.name]}
       </div>
     ));
 
     return (
-      <FlexboxWrapper key={lineNo}>
+      <LineWrapper key={lineNo}>
         {lineItem}
         <ModificationBar
           onDeleteItem={this.props.deleteHandler(lineNo).handleDeleteItem}
           onStartChanges={this.props.changeHandlers(lineNo).handleChangeItem}
         />
-      </FlexboxWrapper>
+      </LineWrapper>
 
     );
   }
 
   getHeaderLine() {
     const lineItem = this.props.headerInfo.map((category, fieldNo) => (
-      <div key={fieldNo} style={styles.headerLine}>
+      <div key={fieldNo} className="tableHeader">
         {category.displayString}
       </div>
     ));
     return (
-      <FlexboxWrapper>
+      <LineWrapper>
         {lineItem}
-      </FlexboxWrapper>
+      </LineWrapper>
     );
   }
 
@@ -123,13 +97,7 @@ class DebtTable extends React.Component {
     });
     const header = this.getHeaderLine();
     return (
-      <div
-        style={{
-          fontSize: '20px',
-          fontFamily: 'Ubuntu',
-          minWidth: '900px',
-        }}
-      >
+      <div className="DebtTable">
         {header}
         {lines}
         <AddDebtContainer onNewDebt={this.props.handleNewDebt} fields={this.props.headerInfo} />

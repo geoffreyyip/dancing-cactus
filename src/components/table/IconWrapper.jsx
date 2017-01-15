@@ -1,28 +1,15 @@
 import React from 'react';
 
-const styles = {
-  iconBar: {
-    display: 'flex',
-    flexDirection: 'row',
-    flexWrap: 'nowrap',
-    alignItems: 'center',
-    justifyContent: 'flex-end',
-  },
-  button: {
-    flexBasis: '40%',
-  },
-};
-
 const IconWrapper = (props) => {
   const flexWrapper = child => (
-    <div style={styles.button}>
+    <div className="IconWrapper-button">
       <div />
       {child}
     </div>
   );
   const icons = React.Children.map(props.children, flexWrapper);
   return (
-    <div style={styles.iconBar}>
+    <div className="IconWrapper">
       {icons}
     </div>
   );

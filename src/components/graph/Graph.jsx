@@ -42,7 +42,7 @@ class Graph extends React.Component {
 
   render() {
     return (
-      <div>
+      <div className="Graph">
         <svg width={this.state.svgWidth} height={this.state.svgHeight} />
       </div>
     );

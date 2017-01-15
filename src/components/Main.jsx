@@ -2,6 +2,9 @@ import React from 'react';
 
 import Graph from './graph/Graph';
 import DebtTable from './table/DebtTable';
+
+// for icons
+import '../styles/font-awesome-4.7.0/css/font-awesome.css';
 import '../styles/Main.css';
 
 const mockData = {
@@ -170,7 +173,7 @@ class Main extends React.Component {
 
   render() {
     return (
-      <div>
+      <div className="Main">
         <Graph
           debts={this.state.debts}
         />

@@ -1,5 +1,4 @@
 import React from 'react';
-import '../../styles/font-awesome-4.7.0/css/font-awesome.css';
 import IconWrapper from './IconWrapper';
 
 const ModificationBar = props => (

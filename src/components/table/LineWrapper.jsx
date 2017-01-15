@@ -1,23 +1,22 @@
 import React from 'react';
-import styles from '../../styles/tableStyles';
 
-// decorate direct child elements with flexbox styling
-const FlexboxWrapper = (props) => {
+// decorate child elements with LineWrapper CSS
+const LineWrapper = (props) => {
   const flexWrapper = child => (
-    <div style={styles.lineItem}>
+    <div className="LineItem">
       {child}
     </div>
   );
   const items = React.Children.map(props.children, flexWrapper);
   return (
-    <div style={styles.lineWrapper}>
+    <div className="LineWrapper">
       {items}
     </div>
   );
 };
 
-FlexboxWrapper.propTypes = {
+LineWrapper.propTypes = {
   children: React.PropTypes.arrayOf(React.PropTypes.node.isRequired),
 };
 
-export default FlexboxWrapper;
+export default LineWrapper;

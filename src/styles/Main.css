@@ -1,18 +1,79 @@
-.graph > * {
+body {
+  background: #ecf0f1;
+}
+
+.Main {
   border: 1px solid seagreen;
 }
 
-.graph {
-  border: 1px solid goldenrod;
+.Graph {
+  margin-left: 15%;
+  margin-right: 15%;
+}
+
+.DebtTable {
+  font-size: 16px;
+  font-family: 'Ubuntu';
+  min-width: 900px;
+}
+
+.tableHeader {
+  box-sizing: border-box;
+  width: 100%;
+  height: 100%;
+  padding: 5%;
+  font-size: 100%;
+  font-family: inherit;
+  font-weight: bold;
+  background: darkgrey;
+}
+
+.tableCell {
+  box-sizing: border-box;
+  width: 100%;
+  height: 100%;
+  padding: 5%;
+  font-size: 100%;
+  font-family: inherit;
+}
+
+.tableCell-morphing {
+  border: '';
+}
+
+.tableCell-display {
+  border-top: solid 1px grey;
+  border-bottom: solid 1px grey;
+  border-left: none;
+  border-right: none;
+}
+
+.tableCell-add {
+  border: '';
+}
+
+.LineWrapper {
   display: flex;
-  height: 400px;
-  width: 800px;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  margin-left: 15%;
+  margin-right: 15%;
+  align-items: center;
 }
 
-.debt-table * {
-  border: 1px solid tomato;
+.LineItem {
+  flex-grow: 0;
+  flex-basis: 20%;
 }
 
-.debt-table {
-  border: 1px solid skyblue;
+.IconWrapper {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+.IconWrapper-button {
+  flex-basis: 40%;
 }
