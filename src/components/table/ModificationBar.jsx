@@ -3,8 +3,19 @@ import IconWrapper from './IconWrapper';
 
 const ModificationBar = props => (
   <IconWrapper>
-    <icon className="fa-pencil" aria-hidden="true" onClick={props.onStartChanges}> Edit </icon>
-    <icon className="fa-trash" aria-hidden="true" onClick={props.onDeleteItem}> Delete </icon>
+    <icon
+      className="fa-pencil button button-primary"
+      aria-hidden="true"
+      onClick={props.onStartChanges}
+    > Edit
+    </icon>
+
+    <icon
+      className="fa-trash button button-normal"
+      aria-hidden="true"
+      onClick={props.onDeleteItem}
+    > Delete
+    </icon>
   </IconWrapper>
 );
 

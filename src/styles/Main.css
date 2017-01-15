@@ -87,7 +87,7 @@ body {
 }
 
 .LineWrapper-cell:hover input{
-  border: 1px solid #00bcf2;
+  border: 1px solid #3c3c3c;
 }
 
 .IconWrapper {
@@ -100,4 +100,26 @@ body {
 
 .IconWrapper-button {
   flex-basis: 40%;
+}
+
+.button {
+  padding: 0.5em 1em 0.5em 1em;
+}
+
+.button-primary {
+  background-color: #0078d7;
+  color: white;
+}
+
+.button-primary:hover {
+  background-color: #005a9e;
+}
+
+.button-normal {
+  background-color: #eaeaea;
+  color: black;
+}
+
+.button-normal:hover {
+  background-color: #c8c8c8;
 }
