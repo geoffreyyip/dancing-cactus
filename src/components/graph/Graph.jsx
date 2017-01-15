@@ -2,6 +2,10 @@ import React from 'react';
 import * as d3 from 'd3';
 import chartAgainstAccelerator from '../../helpers/visualize';
 
+const isEmpty = function isEmpty(debts) {
+  return debts.length === 0;
+};
+
 class Graph extends React.Component {
   constructor(props) {
     super(props);
@@ -25,18 +29,28 @@ class Graph extends React.Component {
     const width = this.state.svgWidth - leftM - rightM;
     const height = this.state.svgHeight - topM - bottomM;
 
-    d3.select('svg')
+    const g = d3.select('svg')
       .append('g')
         .attr('transform', `translate(${leftM},${topM})`)
         .attr('width', `${width}`)
-        .attr('height', `${height}`)
-        .call(chartAgainstAccelerator, this.props.debts);
+        .attr('height', `${height}`);
+
+    if (!isEmpty(this.props.debts)) {
+      g.call(chartAgainstAccelerator, this.props.debts);
+    }
   }
 
   shouldComponentUpdate(nextProps) {
-    d3.select('svg')
-      .select('g')
-      .call(chartAgainstAccelerator, nextProps.debts);
+    if (isEmpty(nextProps.debts)) {
+      d3.select('svg')
+        .select('g')
+        .selectAll('*')
+        .remove();
+    } else {
+      d3.select('svg')
+        .select('g')
+        .call(chartAgainstAccelerator, nextProps.debts);
+    }
     return false;
   }
 
