@@ -3,7 +3,7 @@ import React from 'react';
 // decorate child elements with LineWrapper CSS
 const LineWrapper = (props) => {
   const flexWrapper = child => (
-    <div className="LineItem">
+    <div className="LineWrapper-cell">
       {child}
     </div>
   );

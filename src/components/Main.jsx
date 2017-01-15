@@ -5,6 +5,8 @@ import DebtTable from './table/DebtTable';
 
 // for icons
 import '../styles/font-awesome-4.7.0/css/font-awesome.css';
+// for everything else
+// TODO: split this file up into smaller pieces
 import '../styles/Main.css';
 
 const mockData = {

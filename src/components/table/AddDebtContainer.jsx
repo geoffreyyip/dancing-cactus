@@ -62,13 +62,15 @@ class AddDebtContainer extends React.Component {
       />
     ));
     return (
-      <LineWrapper>
-        {inputItems}
-        <AdditionBar
-          handleNewDebt={this.addNewDebt}
-          handleClearState={this.clearState}
-        />
-      </LineWrapper>
+      <div className="AddDebtContainer">
+        <LineWrapper>
+          {inputItems}
+          <AdditionBar
+            handleNewDebt={this.addNewDebt}
+            handleClearState={this.clearState}
+          />
+        </LineWrapper>
+      </div>
     );
   }
 }
