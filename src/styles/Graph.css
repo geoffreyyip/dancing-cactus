@@ -1,0 +1,8 @@
+.label {
+  fill: black;
+  font-weight: bold;
+}
+
+.tick text {
+  font-size: 12px;
+}

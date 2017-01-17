@@ -3,7 +3,6 @@ import React from 'react';
 const IconWrapper = (props) => {
   const flexWrapper = child => (
     <div className="IconWrapper-button">
-      <div />
       {child}
     </div>
   );

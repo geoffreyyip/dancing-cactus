@@ -13,7 +13,7 @@ class Graph extends React.Component {
     this.state = {
       svgWidth: 960,
       svgHeight: 500,
-      margin: { top: 50, right: 50, bottom: 20, left: 50 },
+      margin: { top: 50, right: 50, bottom: 50, left: 50 },
     };
 
     this.componentDidMount = this.componentDidMount.bind(this);
@@ -30,6 +30,8 @@ class Graph extends React.Component {
     const height = this.state.svgHeight - topM - bottomM;
 
     const g = d3.select('svg')
+        .style('position', 'relative')
+        .style('left', `-${leftM}`)
       .append('g')
         .attr('transform', `translate(${leftM},${topM})`)
         .attr('width', `${width}`)

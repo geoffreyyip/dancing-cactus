@@ -1,12 +1,18 @@
 import * as d3 from 'd3';
 import { getPaymentSchedule } from './paymentSchedule';
 
+const yellow = '#ffb900';
+const red = '#e81123';
+const blue = '#0078d7';
+const purple = '#5c2d91';
+const green = '#107c10';
+
 const colors = [
-  'steelblue',
-  'crimson',
-  'goldenrod',
-  'seagreen',
-  'rebeccapurple',
+  blue,
+  red,
+  yellow,
+  green,
+  purple,
 ];
 
 /**
@@ -83,29 +89,38 @@ const chartAgainstAccelerator = function chartAgainstAccelerator(
     .rangeRound([0, width]);
 
   // set y-scale
+  // I wrote height - 0.0001 b/c y-axis was extending past the origin and
+  // intersecting the 0 tick on the x-axis. I have no idea how to fix it.
   const startingDebt = scenarios[0][0];
   const y = d3.scaleLinear()
     .domain([0, startingDebt])
-    .rangeRound([height, 0]);
+    .rangeRound([height - 0.0001, 0]);  // -0.0001 is a hack, see note above
 
   // create x-axis
   chart.append('g')
-    .attr('class', 'x axis')
-    .attr('transform', `translate(0, ${height})`)
-    .style('font-family', 'Ubuntu')
-    .call(d3.axisBottom(x));
+      .attr('class', 'axis axis-bottom')
+      .attr('transform', `translate(0, ${height})`)
+      .style('font-family', 'Ubuntu')
+      .call(d3.axisBottom(x))
+    .append('text')
+      .attr('class', 'label label-bottom')
+      .attr('fill', '#000')
+      .attr('transform', `translate(${width / 2}, 40)`)
+      .attr('dx', '1.5em')
+      .style('font-size', '1.5em')
+      .text('Months');
 
   // create y-axis
   chart.append('g')
-    .attr('class', 'y axis')
+    .attr('class', 'axis axis-left')
     .style('font-family', 'Ubuntu')
     .call(d3.axisLeft(y))
   .append('text')
+    .attr('class', 'label label-left')
     .attr('fill', '#000')
     .attr('transform', 'translate(20, -30)')
     .attr('dy', '.71em')
     .style('font-size', '1.5em')
-    .style('font-weight', 'bold')
     .text('Debts ($)');
 
   const area = d3.area()
@@ -126,7 +141,7 @@ const chartAgainstAccelerator = function chartAgainstAccelerator(
       .attr('d', area)
       .attr('class', 'area')
       .style('fill', `${currColor}`)
-      .style('fill-opacity', '0.1');
+      .style('fill-opacity', '0.3');
 
     chart.append('path')
       .datum(scenario)
