@@ -40,13 +40,6 @@ body {
   font-family: inherit;
 }
 
-.tableCell-display {
-  border-top: solid 1px #bdc3c7;
-  border-right: none;
-  border-bottom: solid 1px #bdc3c7;
-  border-left: none;
-}
-
 .tableCell-add {
   border: '';
 }
@@ -69,11 +62,6 @@ body {
   background-color: #69afe5;
 }
 
-.LineWrapper:hover .tableCell-morphing,
-.LineWrapper:hover .tableCell-display {
-  opacity: 0.8;
-}
-
 .LineWrapper-cell {
   flex-basis: 20%;
 }
@@ -91,16 +79,18 @@ body {
 }
 
 .IconWrapper-button {
-  flex-basis: 40%;
+  flex-basis: 45%;
 }
 
 .button {
+  box-sizing: border-box;
   padding: 0.5em 1em 0.5em 1em;
 }
 
 .button-primary {
   background-color: #0078d7;
   color: white;
+  width: 100%;
 }
 
 .button-primary:hover {
