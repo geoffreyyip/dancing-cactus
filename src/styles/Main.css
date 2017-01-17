@@ -7,14 +7,15 @@ body {
 }
 
 .Graph {
-  margin-left: 15%;
-  margin-right: 15%;
+  margin: 0 auto;
+  width: 960px;
 }
 
 .DebtTable {
   font-size: 16px;
   font-family: 'Ubuntu';
-  min-width: 900px;
+  margin: 0 auto;
+  width: 960px;
 }
 
 .tableHeader {
@@ -57,8 +58,6 @@ body {
   display: flex;
   flex-direction: row;
   flex-wrap: nowrap;
-  margin-left: 15%;
-  margin-right: 15%;
   align-items: center;
 }
 
