@@ -19,35 +19,32 @@ body {
 }
 
 .tableHeader {
-  opacity: 1.0;
+  background: #3c3c3c;
   box-sizing: border-box;
-  width: 100%;
+  color: white;
   height: 100%;
   padding: 5%;
-  color: white;
-  font-size: 100%;
-  font-family: inherit;
-  background: #3c3c3c;
+  width: 100%;
 }
 
 .tableCell {
   box-sizing: border-box;
-  width: 100%;
   height: 100%;
   padding: 5%;
-  font-size: 100%;
-  font-family: inherit;
+  width: 100%;
 }
 
 .tableCell-morphing {
   border: '';
+  font-size: 100%;
+  font-family: inherit;
 }
 
 .tableCell-display {
   border-top: solid 1px #bdc3c7;
+  border-right: none;
   border-bottom: solid 1px #bdc3c7;
   border-left: none;
-  border-right: none;
 }
 
 .tableCell-add {
@@ -55,33 +52,29 @@ body {
 }
 
 .LineWrapper {
+  align-items: center;
   display: flex;
   flex-direction: row;
   flex-wrap: nowrap;
-  align-items: center;
 }
 
 /* add zebra stripes to DebtTable*/
-.LineWrapper:nth-child(2n) .tableCell-morphing,
-.LineWrapper:nth-child(2n) .tableCell-display {
+.LineWrapper:nth-child(even) .tableCell-morphing,
+.LineWrapper:nth-child(even) .tableCell-display {
   background-color: #b3d6f2;
 }
 
-.LineWrapper:nth-child(2n + 1) .tableCell-morphing,
-.LineWrapper:nth-child(2n + 1) .tableCell-display {
+.LineWrapper:nth-child(odd) .tableCell-morphing,
+.LineWrapper:nth-child(odd) .tableCell-display {
   background-color: #69afe5;
 }
 
-.LineWrapper:hover {
+.LineWrapper:hover .tableCell-morphing,
+.LineWrapper:hover .tableCell-display {
   opacity: 0.8;
 }
 
-.LineWrapper:nth-child(1) {
-  opacity: 1.0 !important;
-}
-
 .LineWrapper-cell {
-  flex-grow: 0;
   flex-basis: 20%;
 }
 
@@ -90,10 +83,10 @@ body {
 }
 
 .IconWrapper {
+  align-items: center;
   display: flex;
   flex-direction: row;
   flex-wrap: nowrap;
-  align-items: center;
   justify-content: flex-end;
 }
 
