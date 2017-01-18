@@ -21,43 +21,39 @@ class Graph extends React.Component {
     this.componentDidMount = this.componentDidMount.bind(this);
     this.shouldComponentUpdate = this.shouldComponentUpdate.bind(this);
     this.handleNewAccelerator = this.handleNewAccelerator.bind(this);
+    this.getGrouping = this.getGrouping.bind(this);
   }
 
 
   componentDidMount() {
-    const topM = this.state.margin.top;
-    const rightM = this.state.margin.right;
-    const leftM = this.state.margin.left;
-    const bottomM = this.state.margin.bottom;
-
-    const width = this.state.svgWidth - leftM - rightM;
-    const height = this.state.svgHeight - topM - bottomM;
-
-    const g = d3.select('svg')
-        .style('position', 'relative')
-        .style('left', `-${leftM}`)
-      .append('g')
-        .attr('transform', `translate(${leftM},${topM})`)
-        .attr('width', `${width}`)
-        .attr('height', `${height}`);
-
     if (!isEmpty(this.props.debts)) {
-      g.call(chartTotalDebtOverTime, this.props.debts, this.state.accelerator);
+      const g = d3.select('g');
+      chartTotalDebtOverTime(g, this.props.debts, this.state.accelerator);
     }
   }
 
   shouldComponentUpdate(nextProps) {
+    const g = d3.select('g');
     if (isEmpty(nextProps.debts)) {
-      d3.select('svg')
-        .select('g')
-        .selectAll('*')
-        .remove();
+      g.selectAll('*').remove();  // clear graph
     } else {
-      d3.select('svg')
-        .select('g')
-        .call(chartTotalDebtOverTime, nextProps.debts, this.state.accelerator);
+      chartTotalDebtOverTime(g, this.props.debts, this.state.accelerator);
     }
     return false;
+  }
+
+  getGrouping() {
+    const margin = this.state.margin;
+    const width = this.state.svgWidth - margin.left - margin.right;
+    const height = this.state.svgHeight - margin.top - margin.bottom;
+
+    return (
+      <g
+        transform={`translate(${margin.left},${margin.top})`}
+        width={width}
+        height={height}
+      />
+    );
   }
 
   handleNewAccelerator(accelerator) {
@@ -65,9 +61,21 @@ class Graph extends React.Component {
   }
 
   render() {
+    const grouping = this.getGrouping();
+    const SVGStyling = {
+      position: 'relative',
+      left: `-${this.state.margin.left}px`,
+    };
     return (
       <div className="Graph">
-        <svg width={this.state.svgWidth} height={this.state.svgHeight} />
+        <svg
+          className="SVGContainer"
+          height={this.state.svgHeight}
+          style={SVGStyling}
+          width={this.state.svgWidth}
+        >
+          {grouping}
+        </svg>
         <AcceleratorBar
           value={this.state.accelerator}
           onNewAccelerator={this.handleNewAccelerator}
