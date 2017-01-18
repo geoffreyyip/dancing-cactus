@@ -1,6 +1,6 @@
 import React from 'react';
 import * as d3 from 'd3';
-import chartAgainstAccelerator from '../../helpers/visualize';
+import { chartTotalDebtOverTime } from '../../helpers/visualize';
 
 const isEmpty = function isEmpty(debts) {
   return debts.length === 0;
@@ -38,7 +38,7 @@ class Graph extends React.Component {
         .attr('height', `${height}`);
 
     if (!isEmpty(this.props.debts)) {
-      g.call(chartAgainstAccelerator, this.props.debts);
+      g.call(chartTotalDebtOverTime, this.props.debts);
     }
   }
 
@@ -51,7 +51,7 @@ class Graph extends React.Component {
     } else {
       d3.select('svg')
         .select('g')
-        .call(chartAgainstAccelerator, nextProps.debts);
+        .call(chartTotalDebtOverTime, nextProps.debts);
     }
     return false;
   }
