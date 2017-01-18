@@ -16,7 +16,7 @@ class AcceleratorBar extends React.Component {
 
     this.state = {
       value: this.props.value,
-      max: 500,
+      max: 1000,
     };
   }
 
@@ -32,10 +32,9 @@ class AcceleratorBar extends React.Component {
             this.props.onNewAccelerator(value);
           }}
           showValue
-          step={this.state.max / 10}
+          step={this.state.max / 20}
           value={this.state.value}
         />
-        <input />
       </div>
     );
   }
