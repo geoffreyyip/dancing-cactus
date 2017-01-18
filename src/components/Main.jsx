@@ -34,14 +34,6 @@ const mockData = {
   ],
 };
 
-function shallowCopyArray(arr) {
-  const result = [];
-  arr.forEach((item) => {
-    result.push(item);
-  });
-  return result;
-}
-
 class Main extends React.Component {
   constructor(props) {
     super(props);
@@ -62,7 +54,7 @@ class Main extends React.Component {
   // type checking is entrusted to associated methods that call handleNewDebt
   handleNewDebt(liability) {
     // shallow copy state to prevent direct manipulation of state
-    const newDebts = shallowCopyArray(this.state.debts);
+    const newDebts = this.state.debts.slice();
 
     // ensure valid input
     // TODO: shallow copy the object and type coerce stuff within it
@@ -103,7 +95,7 @@ class Main extends React.Component {
   changeHandlers(index, field) {
     return {
       handleDeleteChanges: () => {
-        const newDebts = shallowCopyArray(this.state.debts);
+        const newDebts = this.state.debts.slice();
         delete newDebts[index].pendingChanges;
 
         this.setState({ debts: newDebts });
@@ -111,7 +103,7 @@ class Main extends React.Component {
 
       handleEditChanges: (event) => {
         console.log('handleEditChanges triggered');
-        const newDebts = shallowCopyArray(this.state.debts);
+        const newDebts = this.state.debts.slice();
         newDebts[index].pendingChanges[field] = event.target.value;
 
         this.setState({ debts: newDebts });
@@ -119,7 +111,7 @@ class Main extends React.Component {
 
       handleSaveChanges: () => {
         console.log('handleSaveChanges triggered');
-        const newDebts = shallowCopyArray(this.state.debts);
+        const newDebts = this.state.debts.slice();
         const lineItem = newDebts[index];
 
         this.state.headerInfo.forEach((category) => {
@@ -144,7 +136,7 @@ class Main extends React.Component {
 
       handleChangeItem: () => {
         console.log('handleStartChanges triggered');
-        const newDebts = shallowCopyArray(this.state.debts);
+        const newDebts = this.state.debts.slice();
         const lineItem = newDebts[index];
         lineItem.pendingChanges = {};
 
