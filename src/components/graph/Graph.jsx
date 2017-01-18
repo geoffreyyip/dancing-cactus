@@ -1,5 +1,6 @@
 import React from 'react';
 import * as d3 from 'd3';
+import AcceleratorBar from './AcceleratorBar';
 import { chartTotalDebtOverTime } from '../../helpers/visualize';
 
 const isEmpty = function isEmpty(debts) {
@@ -14,11 +15,14 @@ class Graph extends React.Component {
       svgWidth: 960,
       svgHeight: 500,
       margin: { top: 50, right: 50, bottom: 50, left: 50 },
+      accelerator: 0,
     };
 
     this.componentDidMount = this.componentDidMount.bind(this);
     this.shouldComponentUpdate = this.shouldComponentUpdate.bind(this);
+    this.handleNewAccelerator = this.handleNewAccelerator.bind(this);
   }
+
 
   componentDidMount() {
     const topM = this.state.margin.top;
@@ -38,7 +42,7 @@ class Graph extends React.Component {
         .attr('height', `${height}`);
 
     if (!isEmpty(this.props.debts)) {
-      g.call(chartTotalDebtOverTime, this.props.debts);
+      g.call(chartTotalDebtOverTime, this.props.debts, this.state.accelerator);
     }
   }
 
@@ -51,15 +55,23 @@ class Graph extends React.Component {
     } else {
       d3.select('svg')
         .select('g')
-        .call(chartTotalDebtOverTime, nextProps.debts);
+        .call(chartTotalDebtOverTime, nextProps.debts, this.state.accelerator);
     }
     return false;
+  }
+
+  handleNewAccelerator(accelerator) {
+    this.setState({ accelerator });
   }
 
   render() {
     return (
       <div className="Graph">
         <svg width={this.state.svgWidth} height={this.state.svgHeight} />
+        <AcceleratorBar
+          value={this.state.accelerator}
+          onNewAccelerator={this.handleNewAccelerator}
+        />
       </div>
     );
   }
