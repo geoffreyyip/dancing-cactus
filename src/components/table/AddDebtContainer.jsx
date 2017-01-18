@@ -15,6 +15,7 @@ class AddDebtContainer extends React.Component {
     this.addNewDebt = this.addNewDebt.bind(this);
     this.handleChangeTo = this.handleChangeTo.bind(this);
     this.clearState = this.clearState.bind(this);
+    this.addNewDebtIfEnterKeyPressed = this.addNewDebtIfEnterKeyPressed.bind(this);
   }
 
   addNewDebt() {
@@ -41,6 +42,14 @@ class AddDebtContainer extends React.Component {
     };
   }
 
+  // add a keyboard shortcut for addNewDebt; mimics the Add button
+  addNewDebtIfEnterKeyPressed(event) {
+    const enterKey = 13;
+    if (event.keyCode === enterKey) {
+      this.addNewDebt();
+    }
+  }
+
   // sets all state properties to empty strings
   clearState() {
     const emptyState = {};
@@ -58,6 +67,7 @@ class AddDebtContainer extends React.Component {
         placeholder={field.name}
         key={index}
         onChange={this.handleChangeTo(field.name)}
+        onKeyUpCapture={this.addNewDebtIfEnterKeyPressed}
         value={this.state[field.name]}
       />
     ));
