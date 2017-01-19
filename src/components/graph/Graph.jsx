@@ -1,7 +1,7 @@
 import React from 'react';
 import * as d3 from 'd3';
 import AcceleratorBar from './AcceleratorBar';
-import { chartTotalDebtOverTime } from '../../helpers/visualize';
+import chartDebtsOverTime from '../../helpers/visualize';
 
 const isEmpty = function isEmpty(debts) {
   return debts.length === 0;
@@ -28,16 +28,25 @@ class Graph extends React.Component {
   componentDidMount() {
     if (!isEmpty(this.props.debts)) {
       const g = d3.select('g');
-      chartTotalDebtOverTime(g, this.props.debts, this.state.accelerator);
+      this.addChart(g);
     }
   }
 
-  shouldComponentUpdate(nextProps) {
+  /**
+   * Delegate state changes to d3. Manually pass in nextProps and nextState
+   * to ensure that chart visualization gets updated appropriately. Otherwise,
+   * d3 will render based on state/props before the state change, creating a
+   * a lag between d3 and the other React components.
+   *
+   * @param  {Object} nextProps [description]
+   * @return {Boolean} - Return false to block React from rending this component
+   */
+  shouldComponentUpdate(nextProps, nextState) {
     const g = d3.select('g');
     if (isEmpty(nextProps.debts)) {
       g.selectAll('*').remove();  // clear graph
     } else {
-      chartTotalDebtOverTime(g, this.props.debts, this.state.accelerator);
+      this.updateChart(g, nextProps, nextState);
     }
     return false;
   }
@@ -54,6 +63,25 @@ class Graph extends React.Component {
         height={height}
       />
     );
+  }
+
+  addChart(grouping) {
+    chartDebtsOverTime(
+      grouping,
+      this.props.debts,
+      this.state.accelerator,
+      this.state.payoffMethod,
+      this.state.chartType);
+  }
+
+  updateChart(grouping, nextProps, nextState) {
+    console.log(this);
+    chartDebtsOverTime(
+      grouping,
+      nextProps.debts,
+      nextState.accelerator,
+      nextState.payoffMethod,
+      nextState.chartType);
   }
 
   handleNewAccelerator(accelerator) {
