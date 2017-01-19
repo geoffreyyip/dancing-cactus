@@ -18,12 +18,6 @@ const mockData = {
       amount: 20000,
       interestRate: 0.07,
       minPayment: 1685.47,
-      pendingChanges: {
-        name: 'Success!',
-        amount: '17000',
-        interestRate: '0.032',
-        minPayment: '2200.00',
-      },
     },
     { name: 'Mortgage', amount: 43000, interestRate: 0.035, minPayment: 2100.00 },
   ],
