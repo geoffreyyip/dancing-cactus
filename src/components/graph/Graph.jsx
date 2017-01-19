@@ -1,7 +1,14 @@
 import React from 'react';
 import * as d3 from 'd3';
+import { ChoiceGroup } from 'office-ui-fabric-react/lib/ChoiceGroup';
 import AcceleratorBar from './AcceleratorBar';
 import chartDebtsOverTime from '../../helpers/visualize';
+
+const TOTAL = 'total';
+const INDIVIDUAL = 'individual';
+
+const SNOWBALL = 'snowball';
+const AVALANCHE = 'avalanche';
 
 const isEmpty = function isEmpty(debts) {
   return debts.length === 0;
@@ -16,6 +23,8 @@ class Graph extends React.Component {
       svgHeight: 500,
       margin: { top: 50, right: 50, bottom: 50, left: 50 },
       accelerator: 0,
+      chartType: TOTAL || INDIVIDUAL,
+      payoffMethod: SNOWBALL || AVALANCHE,
     };
 
     this.componentDidMount = this.componentDidMount.bind(this);
@@ -65,6 +74,24 @@ class Graph extends React.Component {
     );
   }
 
+  getChartChoices() {
+    const currType = this.state.chartType;
+    const choices = [
+      { key: TOTAL, text: 'Total Debt', checked: currType === TOTAL },
+      { key: INDIVIDUAL, text: 'Individual Debts', checked: currType === INDIVIDUAL },
+    ];
+
+    return (
+      <ChoiceGroup
+        options={choices}
+        onChanged={(option) => {
+          console.log('Choice Group triggered: ', option.key);
+          this.setState({ chartType: option.key });
+        }}
+      />
+    );
+  }
+
   addChart(grouping) {
     chartDebtsOverTime(
       grouping,
@@ -84,13 +111,18 @@ class Graph extends React.Component {
       nextState.chartType);
   }
 
+  handleNewChartType(chartType) {
+    this.setState({ chartType });
+  }
+
   handleNewAccelerator(accelerator) {
     this.setState({ accelerator });
   }
 
   render() {
     const grouping = this.getGrouping();
-    const SVGStyling = {
+    const choiceGroup = this.getChartChoices();
+    const SVGStyles = {
       position: 'relative',
       left: `-${this.state.margin.left}px`,
     };
@@ -99,7 +131,7 @@ class Graph extends React.Component {
         <svg
           className="SVGContainer"
           height={this.state.svgHeight}
-          style={SVGStyling}
+          style={SVGStyles}
           width={this.state.svgWidth}
         >
           {grouping}
@@ -108,6 +140,7 @@ class Graph extends React.Component {
           value={this.state.accelerator}
           onNewAccelerator={this.handleNewAccelerator}
         />
+        {choiceGroup}
       </div>
     );
   }
