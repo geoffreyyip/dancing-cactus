@@ -64,7 +64,7 @@ const prioritize = function prioritize(debts, payoffMethod = SNOWBALL) {
   } else if (payoffMethod === AVALANCHE) {
     dues.slice().reverse().sort(compareByInterest);
   } else {
-    throw Error('Prioritize receieved invalid payOffMethod');
+    throw Error('Invalid payOffMethod, expected "snowball" or "avalanche". Received: ', payoffMethod);
   }
 
   return dues;
