@@ -221,7 +221,12 @@ const chartIndividualDebtsOverTime = function chartIndividualDebtsOverTime(
 
   // each schedule represents the paying down of debt over time
   const defaultColors = colors.slice();
-  dues.forEach((debt) => {
+
+  // order dues from highest starting balance to lowest
+  const sortedDues = dues.sort((prev, curr) => (
+    curr.schedule[0].leftover - prev.schedule[0].leftover
+  ));
+  sortedDues.forEach((debt) => {
     const currColor = defaultColors.pop() || 'steelblue';
     const balanceOverTime = debt.schedule.map(month => month.leftover);
     chart.append('path')
