@@ -40,6 +40,19 @@ const addDebtsTogether = function addDebtsTogether(debts) {
   return debtsByMonth;
 };
 
+const getAxisScales = function getAxisScales(startingDebt, numMonths, width, height) {
+  const xScale = d3.scaleLinear()
+    .domain([0, numMonths])
+    .rangeRound([0, width]);
+
+  // I wrote height - 0.0001 b/c y-axis was extending past the origin and
+  // intersecting the 0 tick on the x-axis. I have no idea how to fix it.
+  const yScale = d3.scaleLinear()
+    .domain([0, startingDebt])
+    .rangeRound([height - 0.0001, 0]);  // -0.0001 is a hack, see note above
+  return { x: xScale, y: yScale };
+};
+
 /**
  * Calculate payment schedule for user supplied debts and chart how the
  * total amount decreases over time.
@@ -69,19 +82,10 @@ const chartTotalDebtOverTime = function chartTotalDebtOverTime(
   const tooltip = d3.select('.Graph').append('div')
     .attr('class', 'SVGTooltip SVGTooltip-Total');
 
-  // set x-scale
-  const numMonths = scenario.length;
-  const x = d3.scaleLinear()
-    .domain([0, numMonths])
-    .rangeRound([0, width]);
-
-  // set y-scale
-  // I wrote height - 0.0001 b/c y-axis was extending past the origin and
-  // intersecting the 0 tick on the x-axis. I have no idea how to fix it.
+  // set x-axis and y-axis
+  const maxMonths = getPaymentSchedule(debts, 0, payoffMethod)[0].schedule.length;
   const startingDebt = scenario[0];
-  const y = d3.scaleLinear()
-    .domain([0, startingDebt])
-    .rangeRound([height - 0.0001, 0]);  // -0.0001 is a hack, see note above
+  const { x, y } = getAxisScales(startingDebt, maxMonths, width, height);
 
   // create x-axis
   chart.append('g')
@@ -166,22 +170,15 @@ const chartIndividualDebtsOverTime = function chartIndividualDebtsOverTime(
   const tooltip = d3.select('.Graph').append('div')
     .attr('class', 'SVGTooltip SVGTooltip-Indvidual');
 
-  // set x-scale based on number of months
-  const numMonths = dues[0].schedule.length;
-  const x = d3.scaleLinear()
-    .domain([0, numMonths])
-    .rangeRound([0, width]);
-
-  // set y-scale based on maximum debt
-  // I wrote height - 0.0001 b/c y-axis was extending past the origin and
-  // intersecting the 0 tick on the x-axis. I have no idea how to fix it.
+  // set x-axis and y-axis
+  // maxMonths shows the months it would take to pay off at 0 accelerator
+  // TODO: factor out the " get months to payoff debt with 0 accelerator" logic
+  const maxMonths = getPaymentSchedule(debts, 0, payoffMethod)[0].schedule.length;
   const highestDebt = dues.reduce((prev, curr) => {
     const currDebt = curr.schedule[0].leftover;
     return Math.max(currDebt, prev);
   }, 0);
-  const y = d3.scaleLinear()
-    .domain([0, highestDebt])
-    .rangeRound([height - 0.0001, 0]);  // -0.0001 is a hack, see note above
+  const { x, y } = getAxisScales(highestDebt, maxMonths, width, height);
 
   // create x-axis
   chart.append('g')
