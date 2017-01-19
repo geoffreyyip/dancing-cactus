@@ -65,6 +65,10 @@ const chartTotalDebtOverTime = function chartTotalDebtOverTime(
   const height = chart.attr('height');
   chart.selectAll('*').remove();
 
+  // add tooltip
+  const tooltip = d3.select('.Graph').append('div')
+    .attr('class', 'SVGTooltip SVGTooltip-Total');
+
   // set x-scale
   const numMonths = scenario.length;
   const x = d3.scaleLinear()
@@ -121,7 +125,20 @@ const chartTotalDebtOverTime = function chartTotalDebtOverTime(
     .attr('d', area)
     .attr('class', 'area')
     .style('fill', `${currColor}`)
-    .style('fill-opacity', '0.3');
+    .style('fill-opacity', '0.3')
+    .on('mouseover', () => {
+      tooltip
+        .style('left', `${d3.event.pageX}px`)
+        .style('top', `${d3.event.pageY}px`)
+        .style('border', `1px solid ${currColor}`)
+        .style('color', currColor)
+        .style('display', 'inline-block')
+        .html('Total Debt');
+    })
+    .on('mouseout', () => {
+      tooltip
+        .style('display', 'none');
+    });
 
   chart.append('path')
     .datum(scenario)
@@ -144,6 +161,10 @@ const chartIndividualDebtsOverTime = function chartIndividualDebtsOverTime(
   const width = chart.attr('width');
   const height = chart.attr('height');
   chart.selectAll('*').remove();
+
+  // add tooltip
+  const tooltip = d3.select('.Graph').append('div')
+    .attr('class', 'SVGTooltip SVGTooltip-Indvidual');
 
   // set x-scale based on number of months
   const numMonths = dues[0].schedule.length;
@@ -208,7 +229,20 @@ const chartIndividualDebtsOverTime = function chartIndividualDebtsOverTime(
       .attr('d', area)
       .attr('class', 'area')
       .style('fill', `${currColor}`)
-      .style('fill-opacity', '0.3');
+      .style('fill-opacity', '0.3')
+      .on('mouseover', () => {
+        tooltip
+          .style('left', `${d3.event.pageX}px`)
+          .style('top', `${d3.event.pageY}px`)
+          .style('display', 'inline-block')
+          .style('color', currColor)
+          .style('border', `1px solid ${currColor}`)
+          .html(`${debt.name}`);
+      })
+      .on('mouseout', () => {
+        tooltip
+          .style('display', 'none');
+      });
 
     chart.append('path')
       .datum(balanceOverTime)
