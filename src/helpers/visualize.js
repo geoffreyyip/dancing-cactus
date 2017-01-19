@@ -258,4 +258,20 @@ const chartIndividualDebtsOverTime = function chartIndividualDebtsOverTime(
   });
 };
 
-export { chartTotalDebtOverTime, chartIndividualDebtsOverTime };
+const chartDebtsOverTime = function chartDebtsOverTime(
+  DOM,
+  debts,
+  accelerator = 0,
+  payoffMethod,
+  chartMode = 'total',
+) {
+  if (chartMode === 'total') {
+    chartTotalDebtOverTime(DOM, debts, accelerator, payoffMethod);
+  } else if (chartMode === 'individual') {
+    chartIndividualDebtsOverTime(DOM, debts, accelerator, payoffMethod);
+  } else {
+    throw Error('Invalid chartMode. Expected "total" or "individual" Received: ', chartMode);
+  }
+};
+
+export default chartDebtsOverTime;
