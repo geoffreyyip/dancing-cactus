@@ -9,13 +9,13 @@ body {
 }
 
 .Header-title {
-  font-family: 'Ubuntu';
+  font-family: 'Helvetica';
   font-size: 32px;
   color: #333333;
 }
 
 .Header-subtitle {
-  font-family: 'Ubuntu';
+  font-family: 'Helvetica';
   font-size: 16px;
   color: #333333;
 }
@@ -30,7 +30,7 @@ body {
 
 .DebtTable {
   font-size: 16px;
-  font-family: 'Ubuntu';
+  font-family: 'Helvetica';
   margin: 60px auto;
   width: 960px;
 }

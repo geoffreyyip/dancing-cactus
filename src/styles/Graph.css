@@ -1,11 +1,11 @@
 .Graph {
-  font-family: 'Ubuntu';
+  font-family: 'Helvetica';
 }
 
 .AcceleratorBar .ms-Label,
 .ms-ChoiceField .ms-Label,
 .ms-ChoiceFieldGroup-title .ms-Label {
-  font-family: 'Ubuntu';
+  font-family: 'Helvetica';
   font-size: 16px;
   color: #333333;
 }
@@ -19,6 +19,10 @@
   border: 1px solid #6F257F;
   padding: 14px;
   text-align: center;
+}
+
+.g {
+  font-family: 'Helvetica';
 }
 
 .label {

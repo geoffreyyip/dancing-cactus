@@ -91,7 +91,6 @@ const chartTotalDebtOverTime = function chartTotalDebtOverTime(
   chart.append('g')
       .attr('class', 'axis axis-bottom')
       .attr('transform', `translate(0, ${height})`)
-      .style('font-family', 'Ubuntu')
       .call(d3.axisBottom(x))
     .append('text')
       .attr('class', 'label label-bottom')
@@ -104,7 +103,6 @@ const chartTotalDebtOverTime = function chartTotalDebtOverTime(
   // create y-axis
   chart.append('g')
     .attr('class', 'axis axis-left')
-    .style('font-family', 'Ubuntu')
     .call(d3.axisLeft(y))
   .append('text')
     .attr('class', 'label label-left')
@@ -184,7 +182,6 @@ const chartIndividualDebtsOverTime = function chartIndividualDebtsOverTime(
   chart.append('g')
       .attr('class', 'axis axis-bottom')
       .attr('transform', `translate(0, ${height})`)
-      .style('font-family', 'Ubuntu')
       .call(d3.axisBottom(x))
     .append('text')
       .attr('class', 'label label-bottom')
@@ -197,7 +194,6 @@ const chartIndividualDebtsOverTime = function chartIndividualDebtsOverTime(
   // create y-axis
   chart.append('g')
     .attr('class', 'axis axis-left')
-    .style('font-family', 'Ubuntu')
     .call(d3.axisLeft(y))
   .append('text')
     .attr('class', 'label label-left')
