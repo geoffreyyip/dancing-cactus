@@ -2,8 +2,23 @@ body {
   background: #f4f4f4;
 }
 
+.Header {
+  height: 50px;
+  margin: 20px auto;
+  width: 960px;
+}
+
+.Header-title {
+  font-family: 'Ubuntu';
+  font-size: 32px;
+}
+
+.Header-subtitle {
+  font-family: 'Ubuntu';
+  font-size: 16px;
+}
+
 .Main {
-  border: 1px solid seagreen;
 }
 
 .Graph {

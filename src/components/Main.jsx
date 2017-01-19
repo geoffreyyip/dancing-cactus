@@ -1,5 +1,6 @@
 import React from 'react';
 
+import Header from './Header';
 import Graph from './graph/Graph';
 import DebtTable from './table/DebtTable';
 
@@ -169,6 +170,7 @@ class Main extends React.Component {
   render() {
     return (
       <div className="Main">
+        <Header />
         <Graph
           debts={this.state.debts}
         />
