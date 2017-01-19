@@ -11,11 +11,13 @@ body {
 .Header-title {
   font-family: 'Ubuntu';
   font-size: 32px;
+  color: #333333;
 }
 
 .Header-subtitle {
   font-family: 'Ubuntu';
   font-size: 16px;
+  color: #333333;
 }
 
 .Main {
