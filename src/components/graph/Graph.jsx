@@ -101,8 +101,8 @@ class Graph extends React.Component {
       this.state.chartType);
   }
 
+  /* eslint-disable class-methods-use-this*/
   updateChart(grouping, nextProps, nextState) {
-    console.log(this);
     chartDebtsOverTime(
       grouping,
       nextProps.debts,
@@ -110,6 +110,7 @@ class Graph extends React.Component {
       nextState.payoffMethod,
       nextState.chartType);
   }
+  /* eslint-enable class-methods-use-this*/
 
   handleNewChartType(chartType) {
     this.setState({ chartType });
