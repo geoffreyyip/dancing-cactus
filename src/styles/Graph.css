@@ -2,6 +2,14 @@
   font-family: 'Ubuntu';
 }
 
+.AcceleratorBar .ms-Label,
+.ms-ChoiceField .ms-Label,
+.ms-ChoiceFieldGroup-title .ms-Label {
+  font-family: 'Ubuntu';
+  font-size: 16px;
+  color: #333333;
+}
+
 .SVGTooltip {
   position: absolute;
   display: none;
