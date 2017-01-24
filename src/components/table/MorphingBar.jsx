@@ -4,13 +4,13 @@ import IconWrapper from './IconWrapper';
 const MorphingBar = props => (
   <IconWrapper>
     <icon
-      className="fa-floppy-o button button-primary"
+      className="button button-primary"
       aria-hidden="true"
       onClick={props.onSaveChanges}
     > Save
     </icon>
     <icon
-      className="fa-undo button button-normal"
+      className="button button-normal"
       aria-hidden="true"
       onClick={props.onDeleteChanges}
     > Revert

@@ -4,13 +4,13 @@ import IconWrapper from './IconWrapper';
 const AdditionBar = props => (
   <IconWrapper>
     <icon
-      className="fa-plus button button-primary"
+      className="button button-primary"
       aria-hidden="true"
       onClick={props.handleNewDebt}
     > Add
     </icon>
     <icon
-      className="fa-ban button button-normal"
+      className="button button-normal"
       aria-hidden="true"
       onClick={props.handleClearState}
     > Reset
