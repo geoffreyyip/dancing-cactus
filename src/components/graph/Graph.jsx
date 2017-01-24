@@ -21,7 +21,7 @@ class Graph extends React.Component {
     this.state = {
       svgWidth: 960,
       svgHeight: 500,
-      margin: { top: 50, right: 50, bottom: 50, left: 50 },
+      margin: { top: 50, right: 60, bottom: 50, left: 60 },
       accelerator: 0,
       chartType: TOTAL || INDIVIDUAL,
       payoffMethod: SNOWBALL || AVALANCHE,
