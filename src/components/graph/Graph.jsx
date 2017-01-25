@@ -85,7 +85,7 @@ class Graph extends React.Component {
       <ChoiceGroup
         options={choices}
         label="Chart Type"
-        onChanged={(option) => {
+        onChange={(option) => {
           this.setState({ chartType: option.key });
         }}
       />
