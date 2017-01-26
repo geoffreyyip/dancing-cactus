@@ -11,6 +11,10 @@ describe('<Header /> smoke tests', () => {
     wrapper = shallow(<Header />);
   });
 
+  it('should render without crashing', () => {
+    shallow(<Header />);
+  });
+
   it('should render exactly two <div> child tags', () => {
     const children = wrapper.children();
     expect(children.find('div')).to.have.lengthOf(2);

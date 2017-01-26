@@ -2,11 +2,11 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { mount, shallow } from 'enzyme';
 
-import MainComponent from './Main';
+import Main from './Main';
 
 describe('handleNewDebt', () => {
   jest.enableAutomock();
-  const main = shallow(<MainComponent />);
+  const main = shallow(<Main />);
   const sampleDebts = [
     { name: 'Car Loan', amount: 9000, interestRate: 0.05, minPayment: 620.23 },
     { name: 'College Loan', amount: 20000, interestRate: 0.07, minPayment: 1685.47 },
@@ -27,8 +27,7 @@ describe('handleNewDebt', () => {
 });
 
 describe('smoke test', () => {
-  it('renders without crashing', () => {
-    const div = document.createElement('div');
-    ReactDOM.render(<MainComponent />, div);
+  it('should render without crashing', () => {
+    const wrapper = shallow(<Main />);
   });
 });
