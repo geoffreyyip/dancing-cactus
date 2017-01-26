@@ -1,5 +1,9 @@
 import React from 'react';
 
+const propTypes = {
+  children: React.PropTypes.arrayOf(React.PropTypes.node.isRequired),
+};
+
 // decorate child elements with LineWrapper CSS
 const LineWrapper = (props) => {
   const flexWrapper = child => (
@@ -15,8 +19,6 @@ const LineWrapper = (props) => {
   );
 };
 
-LineWrapper.propTypes = {
-  children: React.PropTypes.arrayOf(React.PropTypes.node.isRequired),
-};
+LineWrapper.propTypes = propTypes;
 
 export default LineWrapper;

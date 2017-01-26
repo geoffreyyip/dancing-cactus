@@ -1,6 +1,11 @@
 import React from 'react';
 import IconWrapper from './IconWrapper';
 
+const propTypes = {
+  onDeleteChanges: React.PropTypes.func.isRequired,
+  onSaveChanges: React.PropTypes.func.isRequired,
+};
+
 const MorphingBar = props => (
   <IconWrapper>
     <icon
@@ -18,9 +23,6 @@ const MorphingBar = props => (
   </IconWrapper>
 );
 
-MorphingBar.propTypes = {
-  onDeleteChanges: React.PropTypes.func.isRequired,
-  onSaveChanges: React.PropTypes.func.isRequired,
-};
+MorphingBar.propTypes = propTypes;
 
 export default MorphingBar;

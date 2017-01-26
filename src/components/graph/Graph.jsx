@@ -14,6 +14,23 @@ const isEmpty = function isEmpty(debts) {
   return debts.length === 0;
 };
 
+const propTypes = {
+  debts: React.PropTypes.arrayOf(
+    React.PropTypes.shape({
+      name: React.PropTypes.string.isRequired,
+      amount: React.PropTypes.number.isRequired,
+      interestRate: React.PropTypes.number.isRequired,
+      minPayment: React.PropTypes.number.isRequired,
+      pendingChanges: React.PropTypes.shape({
+        name: React.PropTypes.string,
+        amount: React.PropTypes.string,
+        interestRate: React.PropTypes.string,
+        minPayment: React.PropTypes.string,
+      }),
+    }),
+  ).isRequired,
+};
+
 class Graph extends React.Component {
   constructor(props) {
     super(props);
@@ -147,21 +164,6 @@ class Graph extends React.Component {
   }
 }
 
-Graph.propTypes = {
-  debts: React.PropTypes.arrayOf(
-    React.PropTypes.shape({
-      name: React.PropTypes.string.isRequired,
-      amount: React.PropTypes.number.isRequired,
-      interestRate: React.PropTypes.number.isRequired,
-      minPayment: React.PropTypes.number.isRequired,
-      pendingChanges: React.PropTypes.shape({
-        name: React.PropTypes.string,
-        amount: React.PropTypes.string,
-        interestRate: React.PropTypes.string,
-        minPayment: React.PropTypes.string,
-      }),
-    }),
-    ).isRequired,
-};
+Graph.propTypes = propTypes;
 
 export default Graph;

@@ -2,6 +2,16 @@ import React from 'react';
 import LineWrapper from './LineWrapper';
 import AdditionBar from './AdditionBar';
 
+const propTypes = {
+  onNewDebt: React.PropTypes.func.isRequired,
+  fields: React.PropTypes.arrayOf(
+    React.PropTypes.shape({
+      name: React.PropTypes.string.isRequired,
+      type: React.PropTypes.func.isRequired,
+    }),
+  ),
+};
+
 class AddDebtContainer extends React.Component {
   constructor(props) {
     super(props);
@@ -85,14 +95,6 @@ class AddDebtContainer extends React.Component {
   }
 }
 
-AddDebtContainer.propTypes = {
-  onNewDebt: React.PropTypes.func.isRequired,
-  fields: React.PropTypes.arrayOf(
-    React.PropTypes.shape({
-      name: React.PropTypes.string.isRequired,
-      type: React.PropTypes.func.isRequired,
-    }),
-  ),
-};
+AddDebtContainer.propTypes = propTypes;
 
 export default AddDebtContainer;

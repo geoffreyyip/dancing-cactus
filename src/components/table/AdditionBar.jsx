@@ -1,6 +1,11 @@
 import React from 'react';
 import IconWrapper from './IconWrapper';
 
+const propTypes = {
+  handleNewDebt: React.PropTypes.func.isRequired,
+  handleClearState: React.PropTypes.func.isRequired,
+};
+
 const AdditionBar = props => (
   <IconWrapper>
     <icon
@@ -18,9 +23,6 @@ const AdditionBar = props => (
   </IconWrapper>
 );
 
-AdditionBar.propTypes = {
-  handleNewDebt: React.PropTypes.func.isRequired,
-  handleClearState: React.PropTypes.func.isRequired,
-};
+AdditionBar.propTypes = propTypes;
 
 export default AdditionBar;

@@ -1,5 +1,9 @@
 import React from 'react';
 
+const propTypes = {
+  children: React.PropTypes.arrayOf(React.PropTypes.node),
+};
+
 const IconWrapper = (props) => {
   const flexWrapper = child => (
     <div className="IconWrapper-button">
@@ -14,8 +18,6 @@ const IconWrapper = (props) => {
   );
 };
 
-IconWrapper.propTypes = {
-  children: React.PropTypes.arrayOf(React.PropTypes.node),
-};
+IconWrapper.propTypes = propTypes;
 
 export default IconWrapper;

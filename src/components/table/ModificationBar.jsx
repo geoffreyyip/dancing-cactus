@@ -1,6 +1,11 @@
 import React from 'react';
 import IconWrapper from './IconWrapper';
 
+const propTypes = {
+  onDeleteItem: React.PropTypes.func.isRequired,
+  onStartChanges: React.PropTypes.func.isRequired,
+};
+
 const ModificationBar = props => (
   <IconWrapper>
     <icon
@@ -19,9 +24,6 @@ const ModificationBar = props => (
   </IconWrapper>
 );
 
-ModificationBar.propTypes = {
-  onDeleteItem: React.PropTypes.func.isRequired,
-  onStartChanges: React.PropTypes.func.isRequired,
-};
+ModificationBar.propTypes = propTypes;
 
 export default ModificationBar;

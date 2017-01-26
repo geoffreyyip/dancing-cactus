@@ -4,6 +4,31 @@ import AddDebtContainer from './AddDebtContainer';
 import MorphingBar from './MorphingBar';
 import ModificationBar from './ModificationBar';
 
+const propTypes = {
+  debts: React.PropTypes.arrayOf(
+    React.PropTypes.shape({
+      name: React.PropTypes.string.isRequired,
+      amount: React.PropTypes.number.isRequired,
+      interestRate: React.PropTypes.number.isRequired,
+      minPayment: React.PropTypes.number.isRequired,
+      pendingChanges: React.PropTypes.shape({
+        name: React.PropTypes.string,
+        amount: React.PropTypes.string,
+        interestRate: React.PropTypes.string,
+        minPayment: React.PropTypes.string,
+      }),
+    })).isRequired,
+  headerInfo: React.PropTypes.arrayOf(
+    React.PropTypes.shape({
+      name: React.PropTypes.string.isRequired,
+      type: React.PropTypes.func.isRequired,
+    }),
+  ),
+  handleNewDebt: React.PropTypes.func.isRequired,
+  changeHandlers: React.PropTypes.func.isRequired,
+  deleteHandler: React.PropTypes.func.isRequired,
+};
+
 class DebtTable extends React.Component {
   constructor(props) {
     super(props);
@@ -106,29 +131,6 @@ class DebtTable extends React.Component {
   }
 }
 
-DebtTable.propTypes = {
-  debts: React.PropTypes.arrayOf(
-    React.PropTypes.shape({
-      name: React.PropTypes.string.isRequired,
-      amount: React.PropTypes.number.isRequired,
-      interestRate: React.PropTypes.number.isRequired,
-      minPayment: React.PropTypes.number.isRequired,
-      pendingChanges: React.PropTypes.shape({
-        name: React.PropTypes.string,
-        amount: React.PropTypes.string,
-        interestRate: React.PropTypes.string,
-        minPayment: React.PropTypes.string,
-      }),
-    })).isRequired,
-  headerInfo: React.PropTypes.arrayOf(
-    React.PropTypes.shape({
-      name: React.PropTypes.string.isRequired,
-      type: React.PropTypes.func.isRequired,
-    }),
-  ),
-  handleNewDebt: React.PropTypes.func.isRequired,
-  changeHandlers: React.PropTypes.func.isRequired,
-  deleteHandler: React.PropTypes.func.isRequired,
-};
+DebtTable.propTypes = propTypes;
 
 export default DebtTable;
