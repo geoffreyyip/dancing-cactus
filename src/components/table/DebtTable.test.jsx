@@ -35,7 +35,6 @@ describe('DebtTable', () => {
 
   it('should pass handleNewDebt to AddDebtContainer', () => {
     const addDebtContainer = debtTable.find(AddDebtContainer);
-    console.log(addDebtContainer.prop('onNewDebt'));
     expect(addDebtContainer.prop('onNewDebt')).to.exist;
   });
 });
